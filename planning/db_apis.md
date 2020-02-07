@@ -75,22 +75,26 @@ Assumptions:
 ## points
 
 ### Add a new point
-`addPoint(ownerId, title, desc, imgUrl)` will query the db and add a row to the points table. It must return a promise with the entire list row, ie. `{ id: 1, owner_id: 1, title: title, description: "a new point", img_url: "http://www.picture.com/image.png" }`
+`addPoint(ownerId, title, desc, imgUrl, lat, lon)` will query the db and add a row to the points table. It must return a promise with the entire list row, ie. `{ id: 1, owner_id: 1, title: title, description: "a new point", img_url: "http://www.picture.com/image.png", lat: 49.456, lon: -130.543}`
 
 Assumptions:
   * `id` will be a non-empty string corresponding to the owning user id
   * `title` will be a non-empty string
   * `desc` will be a non-empty string
   * `imgUrl` will be a non-empty string that is a complete URL
+  * `lat` will be a floating point latitude between -90 and 90
+  * `lon` will be a floating point longitude between -180 and 180
 
 ### Update a point
-`updatePoint(id, title, desc, imgUrl)` will query the db and update a row on the lists table based on passed in parameters. `title`, `desc`, and `imgUrl` are optional parameters. Only update the parameters that are not `undefined`.
+`updatePoint(id, title, desc, imgUrl, lat, lon)` will query the db and update a row on the lists table based on passed in parameters. `title`, `desc`, `imgUrl`, `lat`, `lon` are optional parameters. Only update the parameters that are not `undefined`.
 
 Assumptions:
   * `id` will be a non-empty string corresponding to the owning user id
   * (optional) `title` will be a non-empty string
   * (optional) `desc` will be a non-empty string
   * (optional) `imgUrl` will be a non-empty string
+  * `lat` will be a floating point latitude between -90 and 90
+  * `lon` will be a floating point longitude between -180 and 180
 
 ### Remove a point
 `remPoint(id)` will query the db and remove an entire row on the points table based on the passed in point id. 
