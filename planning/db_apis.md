@@ -112,3 +112,10 @@ Assumptions:
 * `userId` will be a non-empty string corresponding to the favouriting user id
 * `listId` will be a non-empty string corresponding to the list id being favourited
 
+### Remove a favourite (STRETCH)
+
+`remFav(favId)` will query the db and remove a favourite row from the favourite table based on  the passed in id.
+
+Assumptions:
+* `favId` will be a non-empty string corresponding to the favourite id.
+
