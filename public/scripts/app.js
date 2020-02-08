@@ -1,43 +1,45 @@
 $(document).ready(function() {
 
-  const createTableItem = function(obj){
+  const createTableRow = function(row) {
     const $title = $("<h6>")
-    .text(obj.title);
+      .text(row.title);
 
     const $heart = $("<i>")
-    .addClass("fas fa-heart");
+      .addClass("fas fa-heart");
 
     const $button = $("<button>")
-    .attr("value", "View")
-    .attr("href", `/lists/${obj.id}`);
+      .attr("value", "View")
+      .attr("href", `/lists/${row.id}`);
 
     const $article = $("<article>")
-    .addClass("list-item")
-    .append($title, $heart, $button);
+      .addClass("list-item")
+      .append($title, $heart, $button);
 
     return $article;
-  }
+  };
 
-  const renderTableItems = function(data, containerId) {
-    for (const item of data) {
-      const $newPoint = createTableItem(item)
-    $(`#${containerId}`).append($newPoint)
+  const renderTableItems = function(lists, container) {
+    for (const list of lists) {
+      const $newPoint = createTableRow(list);
+      container.append($newPoint);
     }
-  }
+  };
 
-  const loadTableItems = function(containerId) {
-    $(`#${containerId}`).empty();
+  const loadTableItems = function(container) {
+    container.empty();
     $.get("/lists", (data) => {
-      renderTableItems(JSON.parse(data));
-    })
-  }
+      console.log(data);
+      renderTableItems(data.favs, container);
+    });
+  };
 
-  loadTableItems();
+  const $favsContainer = $("#favs-container");
+  loadTableItems($favsContainer);
 
 });
 
 $("#create-map-button").click(function() {
-  $("#new-map").slideToggle(500)
-})
+  $("#new-map").slideToggle(500);
+});
 
 
