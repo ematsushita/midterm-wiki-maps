@@ -2,7 +2,7 @@
   /login/:id
   /logout
 
-/lists
+/lists/:id
   /create
   /update/:listid (STRETCH)
 
