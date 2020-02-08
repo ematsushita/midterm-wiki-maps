@@ -30,7 +30,50 @@
     <div id="map">
     </div>
 
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD1uro7Q-S_P4cOs1h4mWhu21odb1QuFKE&callback=initMap">
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDy_IDF1mSWDBrRnP-2VFToDQcwUl4LcvA&callback=initMap">
       </script>
+
+    <!--Map Title/Desc -->
+    <div class="container">
+      <h2>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+        <!-- %= lists.title %> -->
+        List Title
+      </h2>
+      <p>
+        <!-- %= lists.desc %> -->
+        List Description. Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni quisquam magnam vel nostrum facere sint neque earum laborum facilis numquam qui fugit, nisi pariatur deserunt molestiae necessitatibus. Quis, eveniet? Rerum.
+      </p>
+      <hr>
+    </div>
+
+    <!-- Map Points -->
+    <div class="container">
+      <h2>Points of Interest</h2>
+      <table class="table">
+        <tbody>
+          <!-- % for (let i=0; i < points.length; i++) { %> -->
+            <tr>
+              <!-- <td>%= points[i].title %></td> -->
+              <td>Point Title</td>
+              <td><a href="">edit</a></td>
+              <td><a href=""><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg></a></td>
+            </tr>
+          <!-- % } %> -->
+          <tr>
+              <!-- <td>%= points[i].title %></td> -->
+              <td>Point Title</td>
+              <td><a href="">edit</a></td>
+              <td><a href=""><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg></a></td>
+            </tr>
+            <tr>
+                <!-- <td>%= points[i].title %></td> -->
+                <td>Point Title</td>
+                <td><a href="">edit</a></td>
+                <td><a href=""><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg></a></td>
+              </tr>
+        </tbody>
+      </table>
+    </div>
   </body>
 </html>

@@ -6,7 +6,7 @@
   /create
   /update/:listid (STRETCH)
 
-/points
+/points/:listid
   /add
   /update/:pointid
   /remove/:pointid
