@@ -39,31 +39,13 @@ app.use(express.static("public"));
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
 
-// const usersRoutes = require("./routes/users");
-// const widgetsRoutes = require("./routes/widgets");
-
-app.post("/users/login/:id", (req, res) => {
-  const getUserById = function(id) {
-    return db.query(`
-    SELECT * FROM users
-    WHERE id=$1`, [id])
-  };
-  const user = getUserById(req.params.id);
-  if (user) {
-    req.session.user_id = user.id;
-    return res.redirect("/");
-  }
-});
-
-app.post("/users/logout", (req, res) => {
-  req.session = null;
-  res.redirect("/");
-});
+const usersRoutes = require("./routes/userRouting");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
-// app.use("/api/users", usersRoutes(db));
-// app.use("/api/widgets", widgetsRoutes(db));
+
+app.use("/users", usersRoutes(db));
+
 // Note: mount other resources here, using the same pattern above
 
 
