@@ -33,16 +33,23 @@
     <script>
       function initMap() {
 
-        const bounds = google.maps.LatLngBounds([{lat: <%= bounds.south %>, lng: <%= bounds.west %>},{lat: <%= bounds.north %>, lng: <%= bounds.east %>}]);
-        const centre = bounds.getCenter();
+        const coords = [
+          {lat: <%= Number(bounds.south) %>, lng: <%= Number(bounds.west) %>},
+          {lat: <%= Number(bounds.north) %>, lng: <%= Number(bounds.east) %>}
+        ];
+
+        const mapBounds = new google.maps.LatLngBounds();
+        const centre = mapBounds.getCenter();
 
         const map = new google.maps.Map(document.getElementById('map'), {zoom: 10, center: centre});
 
         <% for (let i = 0; i < points.length; i++) { %>
-          const marker<%= i %> = new google.maps.Marker({position: {lat: <%= points[i].latitude %>, lng: <%= points[i].longitude %>}, map: map});
+          const coord<%= i %> = {lat: <%= points[i].latitude %>, lng: <%= points[i].longitude %>}
+          const marker<%= i %> = new google.maps.Marker({position: coord<%= i %>, map: map});
+          mapBounds.extend(coord<%= i %>)
         <% } %>
 
-        map.fitBounds(bounds, 1)
+        map.fitBounds(mapBounds, 5)
       }
     </script>
 
