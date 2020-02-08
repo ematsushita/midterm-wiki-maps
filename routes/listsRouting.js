@@ -53,6 +53,10 @@ module.exports = (db) => {
       `, [list_id])
     };
 
+    let templateVars = {
+      user: req.params.id
+    }
+
     getPoints(req.params.id)
       .then (res => {
         templateVars.points = res.rows
