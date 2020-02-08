@@ -1,18 +1,27 @@
 const express = require('express');
-const { addList, getPoints, getBounds, getList } = require('./api/listsApi');
+const {
+  addList,
+  getPoints,
+  getBounds,
+  getList,
+  getFavs,
+  getMyMaps,
+  getMyContributions,
+  getAllOtherMaps
+} = require('./api/listsApi');
 const router  = express.Router();
 
 module.exports = (db) => {
   router.post("/create", (req, response) => {
-    const owner_id = req.session.user.id;
+    const ownerId = req.session.user.id;
     const title = req.body.title;
     const desc = req.body.description;
 
-    addList(db, owner_id, title, desc)
+    addList(db, ownerId, title, desc)
       .then(res => {
         if (res.rows.length) {
-          let list_id = res.rows[0]["id"];
-          return response.redirect(`/lists/${list_id}`);
+          let listId = res.rows[0]["id"];
+          return response.redirect(`/lists/${listId}`);
         }
       });
   });
@@ -35,6 +44,30 @@ module.exports = (db) => {
       .then(res => {
         templateVars.list = res.rows[0];
         return response.render("map", templateVars);
+      });
+  });
+
+  router.get("/", (req, response) => {
+    const userId = 1;
+
+    const lists = {};
+
+    return getFavs(db, userId)
+      .then(res => {
+        lists.favs = res.rows;
+        return getMyMaps(db, userId);
+      })
+      .then(res => {
+        lists.myMaps = res.rows;
+        return getMyContributions(db, userId);
+      })
+      .then(res => {
+        lists.myContributions = res.rows;
+        return getAllOtherMaps(db, userId);
+      })
+      .then(res => {
+        lists.allMaps = res.rows;
+        return response.json(lists);
       });
   });
 
