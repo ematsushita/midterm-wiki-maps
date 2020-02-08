@@ -22,8 +22,19 @@
     <%- include('./partials/_header') %>
 
     <!--Search/Add Bar-->
-    <div>
-      Search Bar
+    <div class="container-fluid my-3">
+      <form class="active-purple-3 active-purple-4">
+        <div class="row align-items-center">
+          <div class="col-8">
+            <input class="form-control form-control-sm ml-3" type="text" placeholder="Search"
+            aria-label="Search">
+          </div>
+          <div class="col-4">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search mx-2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            <button class="btn btn-purple">Add Point</button>
+          </div>
+        </div>
+      </form>
     </div>
 
     <!--Map Embed-->
