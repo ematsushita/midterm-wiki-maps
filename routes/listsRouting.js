@@ -34,14 +34,23 @@ module.exports = (db) => {
       );
     };
 
-    getPoints(req.params.id)
+    const getList = function(list_id) {
+      return db.query(`
+      SELECT * FROM lists
+      WHERE id = $1
+      `, [list_id])
+    }
+    let templateVars = {
+      user: req.session.user,
+    };
 
-    .then(res => {
-      let templateVars = {
-        user: req.session.user,
-        list: req.params.id,
-        points: res.rows
-      };
+    getPoints(req.params.id)
+      .then (res => {
+        templateVars.points = res.rows
+        return getList(req.params.id)
+      })
+      .then(res => {
+      templateVars.list = res.rows[0]
       return response.render("map", templateVars);
     })
   });
