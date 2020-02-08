@@ -28,7 +28,7 @@ $(document).ready(function() {
   const loadTableItems = function(containerId) {
     $(`#${containerId}`).empty();
     $.get("/lists", (data) => {
-      jQuery.parseJSON(data);
+      JSON.parse(data);
       renderTableItems(data);
     })
   }
