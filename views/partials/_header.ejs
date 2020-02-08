@@ -8,11 +8,11 @@
         <ul class="navbar-nav mr-auto">
           <li class="nav-item"><a class="nav-link" href="/lists/create">Create a new list</a></li>
         </ul>
-        <% if (true) { %>
-        <span class="mr-4 text-white">Welcome, Jake!</span>
+        <% if (user) { %>
+        <span class="mr-4 text-white">Welcome, <%= user.name %>!</span>
         <form class="form-inline" action="/users/logout" method="POST">
         <% } %>
-        <% if (!true) { %>
+        <% if (!user) { %>
         <form class="form-inline" action="/users/login/1" method="POST">
           <button type="submit" class="btn btn-secondary">Login</button>
         <% } else { %>
