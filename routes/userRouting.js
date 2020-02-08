@@ -1,15 +1,11 @@
 const express = require('express');
+const { getUserById } = require('./api/userApi');
 const router  = express.Router();
 
 module.exports = (db) => {
   router.post("/login/:id", (req, response) => {
-    const getUserById = function(id) {
-      return db.query(`
-      SELECT * FROM users
-      WHERE id=$1`, [id]);
-    };
-    getUserById(req.params.id)
 
+    getUserById(db, req.params.id)
       .then(res => {
         if (res.rows.length) {
           req.session.user = res.rows[0];
