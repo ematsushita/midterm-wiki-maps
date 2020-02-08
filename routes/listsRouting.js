@@ -22,15 +22,37 @@ module.exports = (db) => {
           let list_id = res.rows[0]["id"];
           return response.redirect(`/lists/${list_id}`);
         }
-      });
+      })
+  });
 
-    router.get("/:id", (req, res) => {
-      let templateVars = {
-        user: req.session.user,
-        list: req.params.id,
-      };
-      res.render("map", templateVars);
-    });
+  router.get("/:id", (req, response) => {
+    const getPoints = function(list_id) {
+      return db.query(`
+      SELECT * FROM points
+      WHERE id = $1
+      `, [list_id]
+      );
+    };
+
+    const getList = function(list_id) {
+      return db.query(`
+      SELECT * FROM lists
+      WHERE id = $1
+      `, [list_id])
+    }
+    let templateVars = {
+      user: req.session.user,
+    };
+
+    getPoints(req.params.id)
+      .then (res => {
+        templateVars.points = res.rows
+        return getList(req.params.id)
+      })
+      .then(res => {
+      templateVars.list = res.rows[0]
+      return response.render("map", templateVars);
+    })
   });
 
   return router;
