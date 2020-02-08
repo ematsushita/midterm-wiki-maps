@@ -30,6 +30,22 @@
     <div id="map">
     </div>
 
+    <script>
+      function initMap() {
+
+        const bounds = google.maps.LatLngBounds([{lat: <%= bounds.south %>, lng: <%= bounds.west %>},{lat: <%= bounds.north %>, lng: <%= bounds.east %>}]);
+        const centre = bounds.getCenter();
+
+        const map = new google.maps.Map(document.getElementById('map'), {zoom: 10, center: centre});
+
+        <% for (let i = 0; i < points.length; i++) { %>
+          const marker<%= i %> = new google.maps.Marker({position: {lat: <%= points[i].latitude %>, lng: <%= points[i].longitude %>}, map: map});
+        <% } %>
+
+        map.fitBounds(bounds, 1)
+      }
+    </script>
+
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDy_IDF1mSWDBrRnP-2VFToDQcwUl4LcvA&callback=initMap">
       </script>
 
@@ -50,7 +66,6 @@
       <h2>Points of Interest</h2>
       <table class="table">
         <tbody>
-          <%= points[1].title %>
           <% for (let i = 0; i < points.length; i++) { %>
             <tr id="point-<%= points[i].id %>">
               <td><%= points[i].title %></td>
