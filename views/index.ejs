@@ -14,6 +14,8 @@
 
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <script type="text/javascript" src="/scripts/app.js"></script>
+    <script src="https://kit.fontawesome.com/e4ebe3d9ea.js" crossorigin="anonymous"></script>
+
   </head>
 
   <body>
@@ -24,22 +26,26 @@
     <!--Main logo and button to make new map-->
     <div class="container text-center my-3">
       <img src="./assets/bucket_logo.png" class="my-2 w-50" alt="bucket.map() logo">
-      <form action="/lists/create?title=&description=" method="POST">
-        <button type="submit" class="btn btn-purple text-white my-2">Create a new map!</button>
+      <form>
+        <button id="create-map-button" class="btn btn-purple text-white my-2">Create a new map!</button>
       </form>
+
+    <!-- Create new Map form -->
+    <form action="/lists" id="create-new-list">
+      <textarea name="title" placeholder="Title"></textarea>
+      <textarea name="description" placeholder="Description"></textarea>
+
+        <input class="btn btn-purple text-white my-2" type="submit" value="Create">
+
+
     </div>
 
     <!--Favourites Table-->
     <div class="container">
       <h4>Favourites</h4>
       <table class="table">
-        <tbody>
-          <tr>
-            <td>List</td>
-            <td>Heart</td>
-            <td>View</td>
-          </tr>
-        </tbody>
+        <section id="favs-container">
+        </section>
       </table>
     </div>
 
@@ -47,13 +53,8 @@
     <div class="container">
       <h4>My Maps</h4>
       <table class="table">
-        <tbody>
-          <tr>
-            <td>List</td>
-            <td>Heart</td>
-            <td>View</td>
-          </tr>
-        </tbody>
+        <section id="my-maps-container">
+        </section>
       </table>
     </div>
 
@@ -61,27 +62,17 @@
     <div class="container">
       <h4>My Contributions</h4>
       <table class="table">
-        <tbody>
-          <tr>
-            <td>List</td>
-            <td>Heart</td>
-            <td>View</td>
-          </tr>
-        </tbody>
+        <section id="my-contributions-container">
+        </section>
       </table>
     </div>
 
     <!--Other Lists Table-->
     <div class="container">
-      <h4>Expore Other Lists</h4>
+      <h4>Explore Other Lists</h4>
       <table class="table">
-        <tbody>
-          <tr>
-            <td>List</td>
-            <td>Heart</td>
-            <td>View</td>
-          </tr>
-        </tbody>
+        <section id="all-maps-container">
+        </section>
       </table>
     </div>
 
