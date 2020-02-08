@@ -29,7 +29,7 @@ module.exports = (db) => {
     const getPoints = function(list_id) {
       return db.query(`
       SELECT * FROM points
-      WHERE id = $1
+      WHERE list_id = $1
       `, [list_id]
       );
     };
