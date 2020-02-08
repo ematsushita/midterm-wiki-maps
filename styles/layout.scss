@@ -1,5 +1,8 @@
 // See: https://sass-lang.com/
 
+$brand-dark-purple: #3C1642;
+$brand-purple: #660875;
+
 body {
   background-color: #EEE;
 
@@ -8,6 +11,14 @@ body {
   }
 
   nav.navbar {
-    background-color: #3C1642;
+    background-color: $brand-dark-purple;
   }
+}
+
+.btn-dark-purple {
+  background-color: $brand-dark-purple;
+}
+
+.btn-purple {
+  background-color: $brand-purple;
 }
