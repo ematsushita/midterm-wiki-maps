@@ -40,13 +40,26 @@ module.exports = (db) => {
       WHERE id = $1
       `, [list_id])
     }
-    let templateVars = {
-      user: req.session.user,
+
+    const getBounds = function(list_id) {
+      return db.query(`
+      SELECT
+      MAX(longitude) as east,
+      MAX(latitude) as north,
+      MIN(longitude) as west,
+      MIN(latitude) as south
+      FROM points
+      WHERE list_id=$1
+      `, [list_id])
     };
 
     getPoints(req.params.id)
       .then (res => {
         templateVars.points = res.rows
+        return getBounds(req.params.id)
+      })
+      .then(res => {
+        templateVars.bounds = res.rows[0]
         return getList(req.params.id)
       })
       .then(res => {
