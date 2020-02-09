@@ -27,18 +27,26 @@
     <div class="container text-center my-3">
       <img src="./assets/bucket_logo.png" class="my-2 w-50" alt="bucket.map() logo"><br>
 
-      <button id="create-map-button" class="btn btn-purple text-white my-2">Create a new map!</button>
+      <input type="button" id="create-map-button" class="btn btn-purple text-white my-2" value="Create a new map!">
+    </div>
 
 
     <!-- Create new Map form -->
-    <form action="/lists" id="submit-new-list">
-      <input name="title" placeholder="Title"></textarea>
-      <textarea name="description" placeholder="Description"></textarea>
-
-        <input class="btn btn-purple text-white my-2" type="submit" value="Create">
-    </form>
-
-    </div>
+    <section class="submit-new-list">
+      <form class="new-map">
+        <div class="form-group">
+          <label class="form-header">Title</label>
+          <input type="text" class="form-control" id="newListTitle" placeholder="Title">
+        </div>
+        <div class="form-group">
+          <label class="form-header">Description</label>
+          <textarea class="form-control" id="newListDesc" placeholder="Description"></textarea>
+        </div>
+        <form action="/create">
+          <button class="btn btn-purple text-white my-2">Create Map!</button>
+        </form>
+      </form>
+    </section>
 
     <!--Favourites Table-->
     <div class="container">

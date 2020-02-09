@@ -42,6 +42,8 @@ $(document).ready(function() {
     });
   };
 
+
+  //Loop through lists to render on homepage
   const paths = ["favs", "myMaps", "myContributions", "allMaps"]
   const containers = [$("#favs-container"), $("#my-maps-container"), $("#my-contributions-container"), $("#all-maps-container") ]
 
@@ -49,12 +51,13 @@ $(document).ready(function() {
     loadTableItems(containers[i], paths[i])
   };
 
-});
 
-$("#create-map-button").click(function() {
-  $("#submit-new-list").slideToggle(500, function() {
-    $(this).find("input").focus();
-  })
+  // Creat new map form slides down
+  $("#create-map-button").click(function() {
+    $(".submit-new-list").slideDown()
+    $("#create-map-button").css({"display": "none"});
+  });
+
 });
 
 
