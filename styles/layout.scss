@@ -36,6 +36,15 @@ body {
   border: 3px solid $brand-purple;
 }
 
-form .hidden {
-  display: none;
+#submit-new-list {
+  visibility: hidden;
 }
+
+.table td {
+  margin: auto;
+  width: 50%;
+  padding-bottom: 0px;
+}
+
+
+

@@ -25,18 +25,18 @@
 
     <!--Main logo and button to make new map-->
     <div class="container text-center my-3">
-      <img src="./assets/bucket_logo.png" class="my-2 w-50" alt="bucket.map() logo">
-      <form>
-        <button id="create-map-button" class="btn btn-purple text-white my-2">Create a new map!</button>
-      </form>
+      <img src="./assets/bucket_logo.png" class="my-2 w-50" alt="bucket.map() logo"><br>
+
+      <button id="create-map-button" class="btn btn-purple text-white my-2">Create a new map!</button>
+
 
     <!-- Create new Map form -->
-    <form action="/lists" id="create-new-list">
-      <textarea name="title" placeholder="Title"></textarea>
+    <form action="/lists" id="submit-new-list">
+      <input name="title" placeholder="Title"></textarea>
       <textarea name="description" placeholder="Description"></textarea>
 
         <input class="btn btn-purple text-white my-2" type="submit" value="Create">
-
+    </form>
 
     </div>
 
@@ -44,8 +44,8 @@
     <div class="container">
       <h4>Favourites</h4>
       <table class="table">
-        <section id="favs-container">
-        </section>
+        <tbody id="favs-container">
+        </tbody>
       </table>
     </div>
 
@@ -53,8 +53,8 @@
     <div class="container">
       <h4>My Maps</h4>
       <table class="table">
-        <section id="my-maps-container">
-        </section>
+        <tbody id="my-maps-container">
+        </tbody>
       </table>
     </div>
 
@@ -62,8 +62,8 @@
     <div class="container">
       <h4>My Contributions</h4>
       <table class="table">
-        <section id="my-contributions-container">
-        </section>
+        <tbody id="my-contributions-container">
+        </tbody>
       </table>
     </div>
 
@@ -71,8 +71,8 @@
     <div class="container">
       <h4>Explore Other Lists</h4>
       <table class="table">
-        <section id="all-maps-container">
-        </section>
+        <tbody id="all-maps-container">
+        </tbody>
       </table>
     </div>
 
