@@ -32,4 +32,17 @@ $(document).ready(function() {
   ];
 
   initMap(coords, []);
+
+
+  //post request to create a new point
+  $(".new-point").submit(function(event) {
+    event.preventDefault();
+    const serialData = $(this).serialize();
+    const post_url = $(this).attr("action");
+
+    $.post(post_url, serialData, () => {
+      $(".table").append()
+    })
+  })
+
 });

@@ -13,17 +13,17 @@ module.exports = (db) => {
 
 
   //Add a new point to a list
-  router.post("/:listid/add", (req, response) => {
-    const ownerId = req.session.user.id;
-    const listId = req.params.listid;
-    const { title, description, latitude, longitude } = req.body
+  // router.post("/:listid/add", (req, response) => {
+  //   const ownerId = req.session.user.id;
+  //   const listId = req.params.listid;
+  //   const { title, description, latitude, longitude } = req.body
 
-    addPoint(db, ownerId, listId, title, description, latitude, longitude)
-      .then(res => {
-        console.log(res)
-        return response.status(200);
-      });
-    });
+  //   addPoint(db, ownerId, listId, title, description, latitude, longitude)
+  //     .then(res => {
+  //       console.log(res)
+  //       return response.status(200);
+  //     });
+  //   });
 
 
   //Update title/description of a point
