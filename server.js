@@ -41,12 +41,14 @@ app.use(express.static("public"));
 
 const usersRoutes = require("./routes/userRouting");
 const listsRoutes = require("./routes/listsRouting");
+const pointsRoutes = require("./routes/pointsRouting");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 
 app.use("/users", usersRoutes(db));
 app.use("/lists", listsRoutes(db));
+app.use("/points", pointsRoutes(db));
 
 // Note: mount other resources here, using the same pattern above
 
@@ -55,7 +57,7 @@ app.use("/lists", listsRoutes(db));
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
 app.get("/", (req, res) => {
-  let templateVars = {user: req.session.user}
+  let templateVars = {user: req.session.user};
   res.render("index", templateVars);
 });
 
