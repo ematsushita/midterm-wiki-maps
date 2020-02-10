@@ -29,13 +29,9 @@ $(document).ready(function() {
     $.get(`/points/${listId}`, function(data) {
       const $table = $("#points-table-body");
 
-      console.log(data);
-
       for (let i = 0; i < data.length; i++) {
         $table.append(`<tr id=list-item-${i}>`);
         const $tableRow = $table.last();
-
-        console.log($tableRow);
 
         $tableRow.append(`<td>${data[i].title}</td>`);
         $tableRow.append(`<td><a href="">edit</a></td>`);
