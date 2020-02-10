@@ -15,6 +15,16 @@ const initMap = function(mapBounds, markerPoints) {
 };
 
 $(document).ready(function() {
+
+  const setListAttr = function() {
+    $.get(`/lists/${listId}/attributes`, function(data) {
+      $("#list-title").text(data.title);
+      $("#list-desc").text(data.description);
+    });
+  };
+
+  setListAttr();
+
   //the coords array will be passed to the initMap function
   const coords = [
     {lat: 49, lng: -123},

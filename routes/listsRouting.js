@@ -26,25 +26,35 @@ module.exports = (db) => {
       });
   });
 
+  router.get("/:id/attributes", (req, response) => {
+    getList(db, req.params.id)
+      .then(res => {
+        return response.json(res.rows[0]);
+      });
+  });
+
   router.get("/:id", (req, response) => {
 
     const templateVars = {
-      user: req.params.id
+      user: req.session.user.id,
+      list: {id: req.params.id}
     };
 
-    getPoints(db, req.params.id)
-      .then(res => {
-        templateVars.points = res.rows;
-        return getBounds(db, req.params.id);
-      })
-      .then(res => {
-        templateVars.bounds = res.rows[0];
-        return getList(db, req.params.id);
-      })
-      .then(res => {
-        templateVars.list = res.rows[0];
-        return response.render("map", templateVars);
-      });
+    // getPoints(db, req.params.id)
+    //   .then(res => {
+    //     templateVars.points = res.rows;
+    //     return getBounds(db, req.params.id);
+    //   })
+    //   .then(res => {
+    //     templateVars.bounds = res.rows[0];
+    //     return getList(db, req.params.id);
+    //   })
+    //   .then(res => {
+    //     templateVars.list = res.rows[0];
+    //     return response.render("map", templateVars);
+    //   });
+
+    return response.render("map", templateVars);
   });
 
   router.get("/", (req, response) => {
