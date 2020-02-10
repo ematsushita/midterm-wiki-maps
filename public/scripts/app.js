@@ -51,12 +51,18 @@ $(document).ready(function() {
     loadTableItems(containers[i], paths[i]);
   }
 
+  //Toggles the arrow in the new list form
+  const arrowToggle = function(el) {
+    (el.css("display") === "none")
+      ? el.css("display", "inline-block")
+      : el.css("display", "none");
+  };
 
   // Create new map form slides down
-  $(".create-map-dropdown").click(function() {
+  $("#new-list-form-toggler").click(function() {
     $(".submit-new-list").slideToggle();
-    $(".down-arrow").css({"display": "none"});
-    $(".up-arrow").css({"display": "block"});
+    arrowToggle($("#down-arrow"));
+    arrowToggle($("#up-arrow"));
   });
 
   $(".add-point-dropdown").click(function(event) {
