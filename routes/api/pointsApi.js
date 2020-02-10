@@ -15,12 +15,11 @@ const addPoint = function(db, ownerId, listId, title, description, latitude, lon
     RETURNING *`, [ownerId, listId, title, description, latitude, longitude]);
 };
 
-const deletePoint = function (db, ownerId, listId) {
+const deletePoint = function (db, point_id) {
   return db.query(`
     DELETE FROM table points
-    WHERE owner_id = $1
-    AND list_id = $2
-  `, [ownerId, listId])
+    WHERE id=$1
+  `, [point_id])
 }
 
 const updatePoint = function (db, pointid, title, description) {

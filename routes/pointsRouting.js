@@ -13,17 +13,16 @@ module.exports = (db) => {
 
 
   //Add a new point to a list
-  // router.post("/:listid/add", (req, response) => {
-  //   const ownerId = req.session.user.id;
-  //   const listId = req.params.listid;
-  //   const { title, description, latitude, longitude } = req.body
+  router.post("/:listid/add", (req, response) => {
+    const ownerId = req.session.user.id;
+    const listId = req.params.listid;
+    const { title, description, latitude, longitude } = req.body
 
-  //   addPoint(db, ownerId, listId, title, description, latitude, longitude)
-  //     .then(res => {
-  //       console.log(res)
-  //       return response.status(200);
-  //     });
-  //   });
+    addPoint(db, ownerId, listId, title, description, latitude, longitude)
+      .then (res => {
+        response.status(201).send();
+      })
+    });
 
 
   //Update title/description of a point
@@ -33,13 +32,20 @@ module.exports = (db) => {
 
     updatePoint(db, pointid, title, description)
       .then (res => {
-
+        response.status(201).send();
       });
   });
 
 
   //Delete a point from a list
-  router.post("/:listid/remove/:pointid")
+  router.post("/:listid/remove/:pointid"), (req, response) => {
+    const pointId = req.params.pointid;
+
+    deletePoint(db, pointId)
+      .then (res => {
+        response.status(201).send();
+      })
+  }
 
   return router;
 };
