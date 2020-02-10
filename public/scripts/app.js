@@ -28,7 +28,6 @@ $(document).ready(function() {
   const loadTableItems = function(container) {
     container.empty();
     $.get("/lists", (data) => {
-      console.log(data);
       renderTableItems(data.favs, container);
     });
   };
