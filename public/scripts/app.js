@@ -4,18 +4,28 @@ $(document).ready(function() {
     const $title = $("<h6>")
       .text(row.title);
 
+    const $titleCell = $("<td>")
+      .append($title);
+
     const $heart = $("<i>")
       .addClass("fas fa-heart");
 
-    const $button = $("<button>")
-      .attr("value", "View")
-      .attr("href", `/lists/${row.id}`);
+    const $heartCell = $("<td>")
+      .append($heart);
 
-    const $article = $("<article>")
+    const $button = $("<a>")
+      .html("View")
+      .attr("href", `/lists/${row.id}`)
+      .addClass("btn btn-purple text-white my-2");
+
+    const $buttonCell = $("<td>")
+      .append($button);
+
+    const $row = $("<tr>")
       .addClass("list-item")
-      .append($title, $heart, $button);
+      .append($titleCell, $heartCell, $buttonCell);
 
-    return $article;
+    return $row;
   };
 
   const renderTableItems = function(lists, container) {
@@ -25,20 +35,35 @@ $(document).ready(function() {
     }
   };
 
-  const loadTableItems = function(container) {
+  const loadTableItems = function(container, path) {
     container.empty();
     $.get("/lists", (data) => {
-      renderTableItems(data.favs, container);
+      renderTableItems(data[path], container);
     });
   };
 
-  const $favsContainer = $("#favs-container");
-  loadTableItems($favsContainer);
 
-});
+  //Loop through lists to render on homepage
+  const paths = ["favs", "myMaps", "myContributions", "allMaps"];
+  const containers = [$("#favs-container"), $("#my-maps-container"), $("#my-contributions-container"), $("#all-maps-container") ];
 
-$("#create-map-button").click(function() {
-  $("#new-map").slideToggle(500);
+  for (let i = 0; i < paths.length; i++) {
+    loadTableItems(containers[i], paths[i]);
+  }
+
+
+  // Create new map form slides down
+  $(".create-map-dropdown").click(function() {
+    $(".submit-new-list").slideToggle();
+    $(".down-arrow").css({"display": "none"});
+    $(".up-arrow").css({"display": "block"});
+  });
+
+  $(".add-point-dropdown").click(function(event) {
+    event.preventDefault();
+    $(".add-new-point").slideToggle();
+  });
+
 });
 
 

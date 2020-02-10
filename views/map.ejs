@@ -32,11 +32,36 @@
           </div>
           <div class="col-auto">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search mx-2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-            <button class="btn btn-purple">Add Point</button>
+            <button class="btn btn-purple add-point-dropdown">Add Point</button>
           </div>
         </div>
       </form>
     </div>
+
+    <!-- Create new Point form -->
+    <section class="add-new-point">
+      <form class="new-point" action="/points/<%= list.id %>/add" method="POST">
+        <div class="form-group">
+          <label class="form-header">Title</label>
+          <input required name="title" type="text" class="form-control" placeholder="Title">
+        </div>
+        <div class="form-group">
+          <label class="form-header">Description</label>
+          <textarea required name="description" class="form-control" placeholder="Description"></textarea>
+        </div>
+        <div class="form-group">
+          <label class="form-header">Latitude</label>
+          <input required name="latitude" class="form-control">
+        </div>
+        <div class="form-group">
+          <label class="form-header">Longitude</label>
+          <input required name="longitude" class="form-control">
+        </div>
+        <form>
+            <button class="btn btn-purple text-white my-2">Add Point!</button>
+        </form>
+      </form>
+    </section>
 
     <!--Map Embed-->
     <div id="map">

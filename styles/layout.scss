@@ -29,13 +29,79 @@ body {
   background-color: grey;
 }
 
-#new-map {
+
+//New map dropdown menu
+.create-map-dropdown {
+  background-color: $brand-purple;
+  width: 30vw;
   display: flex;
-  justify-content: center;
-  flex-direction: column;
-  border: 3px solid $brand-purple;
+  justify-content: space-between;
+  margin: 0 auto;
+
 }
 
-form .hidden {
+#create-map-button {
+  text-align: left;
+}
+
+.down-arrow {
+  color: white;
+  margin-right: 1.5rem;
+  margin-top: 1.2rem;
+}
+
+.up-arrow {
+  color: white;
+  margin-right: 1.5rem;
+  margin-top: 1.2rem;
   display: none;
 }
+
+.submit-new-list {
+  width: 30%;
+  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid $brand-purple;
+  margin: 0 auto;
+  display: none;
+}
+
+.table td {
+  margin: 0 auto;
+  width: 50%;
+  padding-bottom: 0px;
+}
+
+form.new-map {
+  margin: 1vw;
+}
+
+form .form-header {
+  font-weight: bold;
+}
+
+.form-control {
+  width: 80%;
+  margin: auto;
+}
+
+
+//Adding a new point to list
+
+.add-point-dropdown {
+  color: white;
+}
+
+.add-new-point {
+  width: 30%;
+  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid $brand-purple;
+  margin: 0 auto;
+  display: none;
+}
+
+
+

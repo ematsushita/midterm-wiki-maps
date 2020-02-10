@@ -25,27 +25,39 @@
 
     <!--Main logo and button to make new map-->
     <div class="container text-center my-3">
-      <img src="./assets/bucket_logo.png" class="my-2 w-50" alt="bucket.map() logo">
-      <form>
-        <button id="create-map-button" class="btn btn-purple text-white my-2">Create a new map!</button>
-      </form>
+      <img src="./assets/bucket_logo.png" class="my-2 w-50" alt="bucket.map() logo"><br>
+
+      <div class="create-map-dropdown">
+        <input type="button" id="create-map-button" class="btn btn-purple text-white my-2" value="Create a new map!">
+        <i class="down-arrow" class="fas fa-angle-down"></i>
+        <i class="up-arrow" class="fas fa-angle-up"></i>
+      </div>
+    </div>
+
 
     <!-- Create new Map form -->
-    <form action="/lists" id="create-new-list">
-      <textarea name="title" placeholder="Title"></textarea>
-      <textarea name="description" placeholder="Description"></textarea>
-
-        <input class="btn btn-purple text-white my-2" type="submit" value="Create">
-
-
-    </div>
+    <section class="submit-new-list">
+      <form class="new-map" action="/lists/create" method="POST">
+        <div class="form-group">
+          <label class="form-header">Title</label>
+          <input required name="title" type="text" class="form-control" id="newListTitle" placeholder="Title">
+        </div>
+        <div class="form-group">
+          <label class="form-header">Description</label>
+          <textarea required name="description" class="form-control" id="newListDesc" placeholder="Description"></textarea>
+        </div>
+        <form>
+          <button class="btn btn-purple text-white my-2">Create Map!</button>
+        </form>
+      </form>
+    </section>
 
     <!--Favourites Table-->
     <div class="container">
       <h4>Favourites</h4>
       <table class="table">
-        <section id="favs-container">
-        </section>
+        <tbody id="favs-container">
+        </tbody>
       </table>
     </div>
 
@@ -53,8 +65,8 @@
     <div class="container">
       <h4>My Maps</h4>
       <table class="table">
-        <section id="my-maps-container">
-        </section>
+        <tbody id="my-maps-container">
+        </tbody>
       </table>
     </div>
 
@@ -62,8 +74,8 @@
     <div class="container">
       <h4>My Contributions</h4>
       <table class="table">
-        <section id="my-contributions-container">
-        </section>
+        <tbody id="my-contributions-container">
+        </tbody>
       </table>
     </div>
 
@@ -71,8 +83,8 @@
     <div class="container">
       <h4>Explore Other Lists</h4>
       <table class="table">
-        <section id="all-maps-container">
-        </section>
+        <tbody id="all-maps-container">
+        </tbody>
       </table>
     </div>
 
