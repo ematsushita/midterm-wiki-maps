@@ -16,13 +16,13 @@ module.exports = (db) => {
   router.post("/:listid/add", (req, response) => {
     const ownerId = req.session.user.id;
     const listId = req.params.listid;
-    const { title, description, latitude, longitude } = req.body
+    const { title, description, latitude, longitude } = req.body;
 
     addPoint(db, ownerId, listId, title, description, latitude, longitude)
-      .then (res => {
+      .then(res => {
         response.status(201).send();
-      })
-    });
+      });
+  });
 
 
   //Update title/description of a point
@@ -31,7 +31,7 @@ module.exports = (db) => {
     const { title, description } = req.body;
 
     updatePoint(db, pointid, title, description)
-      .then (res => {
+      .then(res => {
         response.status(201).send();
       });
   });
@@ -42,10 +42,10 @@ module.exports = (db) => {
     const pointId = req.params.pointid;
 
     deletePoint(db, pointId)
-      .then (res => {
+      .then(res => {
         response.status(201).send();
-      })
-  }
+      });
+  };
 
   return router;
 };

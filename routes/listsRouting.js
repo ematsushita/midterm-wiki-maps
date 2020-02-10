@@ -33,6 +33,13 @@ module.exports = (db) => {
       });
   });
 
+  router.get("/:id/bounds", (req, response) => {
+    getBounds(db, req.params.id)
+      .then(res => {
+        return response.json(res.rows[0]);
+      });
+  });
+
   router.get("/:id", (req, response) => {
 
     const templateVars = {
