@@ -52,11 +52,16 @@ $(document).ready(function() {
   };
 
 
-  // Creat new map form slides down
+  // Create new map form slides down
   $(".create-map-dropdown").click(function() {
     $(".submit-new-list").slideToggle()
-    $("#down-arrow").css({"display": "none"})
-    $("#up-arrow").css({"display": "block"});
+    $(".down-arrow").css({"display": "none"})
+    $(".up-arrow").css({"display": "block"});
+  });
+
+  $(".add-point-dropdown").click(function(event) {
+    event.preventDefault();
+    $(".add-new-point").slideToggle();
   });
 
 });

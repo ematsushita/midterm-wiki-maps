@@ -29,6 +29,8 @@ body {
   background-color: grey;
 }
 
+
+//New map dropdown menu
 .create-map-dropdown {
   background-color: $brand-purple;
   width: 30vw;
@@ -42,13 +44,13 @@ body {
   text-align: left;
 }
 
-#down-arrow {
+.down-arrow {
   color: white;
   margin-right: 1.5rem;
   margin-top: 1.2rem;
 }
 
-#up-arrow {
+.up-arrow {
   color: white;
   margin-right: 1.5rem;
   margin-top: 1.2rem;
@@ -82,6 +84,23 @@ form .form-header {
 .form-control {
   width: 80%;
   margin: auto;
+}
+
+
+//Adding a new point to list
+
+.add-point-dropdown {
+  color: white;
+}
+
+.add-new-point {
+  width: 30%;
+  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid $brand-purple;
+  margin: 0 auto;
+  display: none;
 }
 
 
