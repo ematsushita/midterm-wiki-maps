@@ -19,7 +19,7 @@ $(document).ready(function() {
       .addClass("btn btn-purple text-white my-2");
 
     const $buttonCell = $("<td>")
-      .append($button)
+      .append($button);
 
     const $row = $("<tr>")
       .addClass("list-item")
@@ -44,18 +44,18 @@ $(document).ready(function() {
 
 
   //Loop through lists to render on homepage
-  const paths = ["favs", "myMaps", "myContributions", "allMaps"]
-  const containers = [$("#favs-container"), $("#my-maps-container"), $("#my-contributions-container"), $("#all-maps-container") ]
+  const paths = ["favs", "myMaps", "myContributions", "allMaps"];
+  const containers = [$("#favs-container"), $("#my-maps-container"), $("#my-contributions-container"), $("#all-maps-container") ];
 
-  for (let i=0; i < paths.length; i++) {
-    loadTableItems(containers[i], paths[i])
-  };
+  for (let i = 0; i < paths.length; i++) {
+    loadTableItems(containers[i], paths[i]);
+  }
 
 
   // Create new map form slides down
   $(".create-map-dropdown").click(function() {
-    $(".submit-new-list").slideToggle()
-    $(".down-arrow").css({"display": "none"})
+    $(".submit-new-list").slideToggle();
+    $(".down-arrow").css({"display": "none"});
     $(".up-arrow").css({"display": "block"});
   });
 

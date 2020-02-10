@@ -13,7 +13,14 @@
     <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
 
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDy_IDF1mSWDBrRnP-2VFToDQcwUl4LcvA&libraries=places"></script>
     <script type="text/javascript" src="/scripts/app.js"></script>
+    <script type="text/javascript" src="/scripts/map.js"></script>
+    <script type="text/javascript" src="/scripts/search.js"></script>
+
+    <script>
+      const listId = <%= list.id %>;
+    </script>
   </head>
 
   <body>
@@ -26,7 +33,7 @@
       <form class="active-purple-3 active-purple-4">
         <div class="row align-items-center">
           <div class="col-8">
-            <input class="form-control form-control-sm" type="text" placeholder="Search"
+            <input id="autocomplete" class="form-control form-control-sm" type="text" placeholder="Search"
             aria-label="Search">
           </div>
           <div class="col-auto">
@@ -63,43 +70,16 @@
     </section>
 
     <!--Map Embed-->
-    <div id="map">
-    </div>
-
-    <script>
-      function initMap() {
-
-        const coords = [
-          {lat: <%= Number(bounds.south) %>, lng: <%= Number(bounds.west) %>},
-          {lat: <%= Number(bounds.north) %>, lng: <%= Number(bounds.east) %>}
-        ];
-
-        const mapBounds = new google.maps.LatLngBounds();
-        const centre = mapBounds.getCenter();
-
-        const map = new google.maps.Map(document.getElementById('map'), {zoom: 10, center: centre});
-
-        <% for (let i = 0; i < points.length; i++) { %>
-          const coord<%= i %> = {lat: <%= points[i].latitude %>, lng: <%= points[i].longitude %>}
-          const marker<%= i %> = new google.maps.Marker({position: coord<%= i %>, map: map});
-          mapBounds.extend(coord<%= i %>)
-        <% } %>
-
-        map.fitBounds(mapBounds, 5)
-      }
-    </script>
-
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDy_IDF1mSWDBrRnP-2VFToDQcwUl4LcvA&libraries=places&callback=initMap">
-      </script>
+    <div id="map"></div>
 
     <!--Map Title/Desc -->
     <div class="container">
-      <h2>
+      <h2 id="list-title">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
-        <%= list.title %>
+        TITLE
       </h2>
-      <p>
-        <%= list.description %>
+      <p id="list-desc">
+        DESCRIPTION
       </p>
       <hr>
     </div>
@@ -109,13 +89,11 @@
       <h2>Points of Interest</h2>
       <table class="table">
         <tbody>
-          <% for (let i = 0; i < points.length; i++) { %>
-            <tr id="point-<%= points[i].id %>">
-              <td><%= points[i].title %></td>
+            <tr id="">
+              <td>TITLE</td>
               <td><a href="">edit</a></td>
               <td><a href=""><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg></a></td>
             </tr>
-          <% } %>
         </tbody>
       </table>
     </div>
