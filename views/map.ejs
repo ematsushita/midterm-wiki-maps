@@ -39,7 +39,7 @@
 
     <!-- Create new Point form -->
     <section class="add-new-point">
-      <form class="new-point" action="/points/LISTID/add" method="POST">
+      <form class="new-point" action="/points/<%= list.id %>/add" method="POST">
         <div class="form-group">
           <label class="form-header">Title</label>
           <input required name="title" type="text" class="form-control" placeholder="Title">
