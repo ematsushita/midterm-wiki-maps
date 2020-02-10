@@ -53,9 +53,10 @@ $(document).ready(function() {
 
 
   // Creat new map form slides down
-  $("#create-map-button").click(function() {
-    $(".submit-new-list").slideDown()
-    $("#create-map-button").css({"display": "none"});
+  $(".create-map-dropdown").click(function() {
+    $(".submit-new-list").slideToggle()
+    $("#down-arrow").css({"display": "none"})
+    $("#up-arrow").css({"display": "block"});
   });
 
 });

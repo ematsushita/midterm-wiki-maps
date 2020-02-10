@@ -27,7 +27,11 @@
     <div class="container text-center my-3">
       <img src="./assets/bucket_logo.png" class="my-2 w-50" alt="bucket.map() logo"><br>
 
-      <input type="button" id="create-map-button" class="btn btn-purple text-white my-2" value="Create a new map!">
+      <div class="create-map-dropdown">
+        <input type="button" id="create-map-button" class="btn btn-purple text-white my-2" value="Create a new map!">
+        <i id="down-arrow" class="fas fa-angle-down"></i>
+        <i id="up-arrow" class="fas fa-angle-up"></i>
+      </div>
     </div>
 
 
@@ -42,7 +46,7 @@
           <label class="form-header">Description</label>
           <textarea class="form-control" id="newListDesc" placeholder="Description"></textarea>
         </div>
-        <form action="/create">
+        <form action="/lists/create">
           <button class="btn btn-purple text-white my-2">Create Map!</button>
         </form>
       </form>
