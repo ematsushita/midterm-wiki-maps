@@ -1,8 +1,8 @@
 # User Stories
 
-- As a user, I want to see a list of available maps so that I can load/use them 
+- [x] As a user, I want to see a list of available maps so that I can load/use them 
 
-- As a user, I want to be able to view all the points on a map so I can go to those places 
+- [x] As a user, I want to be able to view all the points on a map so I can go to those places 
 
 - As a user, I should be able to put as many points on a single map as I want, so I can keep my ideas together 
 
