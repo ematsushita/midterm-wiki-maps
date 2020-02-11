@@ -1,4 +1,8 @@
+let map;
+let service;
 let infoWindow = null;
+let mapCentre;
+let bounds;
 
 const buildInfoWindow = function(title, desc, imgUrl) {
   infoWindow = null;
@@ -39,11 +43,9 @@ const placeMarker = function(marker, point, map) {
   return newMarker;
 };
 
-const initMap = function(mapBounds, markerPoints) {
-  const bounds = new google.maps.LatLngBounds(mapBounds[0], mapBounds[1]);
-  const mapCentre = bounds.getCenter();
 
-  const map = new google.maps.Map(document.getElementById('map'), {zoom: 10, center: mapCentre});
+const initMap = function(mapCentre, markerPoints) {
+  map = new google.maps.Map(document.getElementById('map'), {zoom: 10, center: mapCentre});
 
   markerPoints.forEach(point => {
     const location = {lat: point.latitude, lng: point.longitude};
@@ -53,7 +55,9 @@ const initMap = function(mapBounds, markerPoints) {
 
   map.fitBounds(bounds, 5);
 
-  const autocomplete = new google.maps.places.Autocomplete(document.getElementById('autocomplete'));
+  const searchBox = new google.maps.places.SearchBox(document.getElementById('autocomplete'), {bounds: bounds});
+
+  service = new google.maps.places.PlacesService(map);
 };
 
 const getBounds = function() {
@@ -61,23 +65,15 @@ const getBounds = function() {
 };
 
 $(document).ready(function() {
-
-  //the coords array will be passed to the initMap function
-  const coords = [];
-
   getBounds()
     .then(value => {
-      coords.push({lat: value["south"], lng: value["west"]});
-      coords.push({lat: value["north"], lng: value["east"]});
+      bounds = new google.maps.LatLngBounds({lat: value["south"], lng: value["west"]}, {lat: value["north"], lng: value["east"]});
       return;
     })
     .then(() => {
       return getPoints();
     })
     .then(value => {
-      initMap(coords, value);
+      initMap(bounds.getCenter(), value);
     });
-
-
-
 });
