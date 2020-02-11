@@ -52,7 +52,7 @@ const getFavs = function(db, userId) {
 const getMyMaps = function(db, userId) {
   return db.query(`
     SELECT lists.*, favourites.id as fave_id FROM lists
-    LEFT JOIN favourites ON favourites.owner_id = lists.owner_id
+    LEFT JOIN favourites ON favourites.user_id = lists.owner_id
     WHERE owner_id = $1
   `, [userId]);
 };
