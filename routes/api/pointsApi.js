@@ -17,7 +17,7 @@ const addPoint = function(db, ownerId, listId, title, description, latitude, lon
 
 const deletePoint = function (db, point_id) {
   return db.query(`
-    DELETE FROM table points
+    DELETE FROM points
     WHERE id=$1
   `, [point_id])
 }

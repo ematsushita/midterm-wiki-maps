@@ -30,7 +30,6 @@ module.exports = (db) => {
     const { pointid } = req.params;
     const { title, description } = req.body;
 
-    console.log(req.body)
     updatePoint(db, pointid, title, description)
       .then(res => {
         response.status(201).send();

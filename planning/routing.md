@@ -13,5 +13,4 @@
   /remove/:pointid
 
 /favourites
-  /add
-  /remove/:favouriteid
+  /:listid
