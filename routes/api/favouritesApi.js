@@ -1,52 +1,51 @@
-const findFave = function (db, user_id, list_id) {
-  return db.query(
-    `
+// Returns an array with a favourite object given a userID and listId.
+// If it doesn't exist, the array will be empty
+const findFave = function(db, userId, listId) {
+  return db.query(`
     SELECT * FROM favourites
-    WHERE user_id = $1
-    AND list_id = $2
-    `, [user_id, list_id]
-  )
+      WHERE user_id = $1
+      AND list_id = $2
+    `, [userId, listId]
+  );
 };
 
-
-const addFave = function (db, user_id, list_id) {
-  return db.query(
-    `
+//creates a new record of a favourite for a list id and user id
+// returns array with object inside
+const addFave = function(db, userId, listId) {
+  return db.query(`
     INSERT INTO favourites
-    (user_id, list_id)
+      (user_id, list_id)
     VALUES
-    ($1, $2)
+      ($1, $2)
     RETURNING *
-    `, [user_id, list_id]
-  )
+    `, [userId, listId]
+  );
 };
 
-
-const removeFave = function (db, user_id, list_id) {
-  return db.query(
-    `
+//removes a record of a favourite given a userid and list id
+const removeFave = function(db, userId, listId) {
+  return db.query(`
     DELETE FROM favourites
-    WHERE user_id = $1
-    AND list_id = $2
-    `, [user_id, list_id]
-  )
+      WHERE user_id = $1
+      AND list_id = $2
+    `, [userId, listId]
+  );
 };
 
-
-const toggleFave = function (db, user_id, list_id) {
-  return findFave(db, user_id, list_id)
+// Toggle fave search the database for a favourite record
+// If it exists, it deletes it
+// If it does not, it creates it
+const toggleFave = function(db, userId, listId) {
+  return findFave(db, userId, listId)
     .then(value => {
       if (value.rows.length) {
-        return removeFave(db, user_id, list_id)
+        return removeFave(db, userId, listId)
           .then(() => false);
       } else {
-        return addFave(db, user_id, list_id)
+        return addFave(db, userId, listId)
           .then(() => true);
       }
-    })
+    });
 };
 
-
-module.exports = {
-  toggleFave
-}
+module.exports = { toggleFave };

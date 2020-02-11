@@ -1,10 +1,4 @@
-//Returns a user object given an id
-const getUserById = function(db, id) {
-  return db.query(`
-  SELECT * FROM users
-  WHERE id=$1`, [id]);
-};
+//Returns a user object [{ id, name }] given an id
+const getUserById = (db, userId) => db.query(`SELECT * FROM users WHERE id=$1`, [userId]);
 
-module.exports = {
-  getUserById
-};
+module.exports = { getUserById };

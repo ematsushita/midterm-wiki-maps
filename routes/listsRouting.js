@@ -27,7 +27,8 @@ module.exports = (db) => {
   });
 
   router.get("/:id/attributes", (req, response) => {
-    getList(db, req.params.id)
+    const userId = req.session.user.id;
+    getList(db, userId, req.params.id)
       .then(res => {
         return response.json(res.rows[0]);
       });

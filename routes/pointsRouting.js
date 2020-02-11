@@ -16,9 +16,9 @@ module.exports = (db) => {
   router.post("/:listid/add", (req, response) => {
     const ownerId = req.session.user.id;
     const listId = req.params.listid;
-    const { title, description, latitude, longitude } = req.body;
+    const { title, description, imgUrl, latitude, longitude } = req.body;
 
-    addPoint(db, ownerId, listId, title, description, latitude, longitude)
+    addPoint(db, ownerId, listId, title, description, imgUrl, latitude, longitude)
       .then(res => {
         response.status(201).send();
       });
@@ -30,7 +30,7 @@ module.exports = (db) => {
     const { pointid } = req.params;
     const { title, description } = req.body;
 
-    updatePoint(db, pointid, title, description)
+    updatePoint(db, pointid, title, description, imgUrl)
       .then(res => {
         response.status(201).send();
       });
