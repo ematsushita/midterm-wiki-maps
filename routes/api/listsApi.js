@@ -22,7 +22,7 @@ const getList = function(db, listId) {
   return db.query(`
     SELECT lists.*, favourites.id as fave_id
     FROM lists
-    JOIN favourites ON lists.id = favourites.list_id
+    LEFT JOIN favourites ON lists.id = favourites.list_id
     WHERE lists.id = $1
   `, [listId]);
 };
