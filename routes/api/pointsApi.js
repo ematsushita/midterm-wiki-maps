@@ -1,8 +1,9 @@
 const getPoints = function(db, listId) {
   return db.query(`
-    SELECT *
+    SELECT points.*, favourites.id as fave_id
     FROM points
-    WHERE list_id = $1
+    LEFT JOIN favourites ON points.list_id = favourites.list_id
+    WHERE points.list_id = $1
   `, [listId]);
 };
 
