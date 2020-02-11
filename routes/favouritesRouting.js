@@ -7,7 +7,7 @@ module.exports = (db) => {
 
   router.post("/:listid", (req, response) => {
     const listId = req.params.listid;
-    const userId = 1 //req.session.user.id;
+    const userId = req.session.user.id;
 
     toggleFave(db, userId, listId)
       .then(res => {

@@ -38,14 +38,14 @@ module.exports = (db) => {
 
 
   //Delete a point from a list
-  router.post("/:listid/remove/:pointid"), (req, response) => {
+  router.post("/:listid/remove/:pointid", (req, response) => {
     const pointId = req.params.pointid;
 
     deletePoint(db, pointId)
       .then(res => {
         response.status(201).send();
       });
-  };
+  });
 
   return router;
 };
