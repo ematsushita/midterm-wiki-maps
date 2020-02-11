@@ -41,7 +41,7 @@ const getBounds = function(db, listId) {
 //Returns a list of all lists in a user's favourites
 const getFavs = function(db, userId) {
   return db.query(`
-    SELECT lists.id, lists.owner_id, lists.title, lists.description
+    SELECT lists.id, lists.owner_id, lists.title, lists.description, favourites.id as fave_id
     FROM lists
       JOIN favourites ON lists.id = favourites.list_id
     WHERE favourites.user_id = $1
