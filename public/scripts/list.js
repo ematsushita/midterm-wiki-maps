@@ -1,5 +1,20 @@
 $(document).ready(function() {
 
+  const updatePointForm = function(formData, url) {
+    console.log("clicked")
+    console.log("updated")
+    console.log("url: ", url)
+    console.log("form data: ", formData)
+
+
+    $.post(url, formData, () => {
+      getPoints()
+      .then (value => {
+        displayPoints(value)
+      });
+    })
+  }
+
   const setListAttr = function() {
     $.get(`/lists/${listId}/attributes`, function(data) {
       $("#list-title").text(data.title);
@@ -10,10 +25,13 @@ $(document).ready(function() {
   setListAttr();
 
 
-  const buildEditForm = function () {
+  const buildEditForm = function(pointId) {
+
     const form = `
-    <div class=“update-point-form my-3" id=”edit-form-${i}>
-      <form class="update-point" action="/points/<%= list.id %>/update/<%=point.id%>“ method="POST">
+    <tr class="new-row">
+    <td colspan="3">
+    <div class=“update-point-form my-3">
+      <form class="update-point" action="/points/${listId}/update/${pointId}" type="submit">
 
         <div class="form-group">
           <input required name="title" type="text" class="form-control" placeholder="Title">
@@ -28,31 +46,49 @@ $(document).ready(function() {
         </div>
       </form>
     </div>
+    </td>
+    </tr>
     `
     return form;
+  }
+
+  const appendForm = function(form, i) {
+    $(".new-row").remove();
+    console.log($("#points-table-body tr").eq(i))
+    $("#points-table-body tr").eq(i + 1).after(form)
+    $(".update-point").submit((event) => {
+      event.preventDefault();
+      const serialData = $('.update-point').serialize();
+      const post_url = $('.update-point').attr("action");
+
+      updatePointForm(serialData, post_url)})
   }
 
 
   const displayPoints = function(data) {
     const $table = $("#points-table-body");
     $table.empty();
-    console.log(data);
 
     for (let i = 0; i < data.length; i++) {
       $table.append(`<tr id=list-item-${i}>`);
       const $tableRow = $table.last();
 
-      console.log($tableRow);
-
       $tableRow.append(`<td>${data[i].title}</td>`);
-      $tableRow.append(`<td><button class="edit-point btn btn-purple text-white my-2">Edit</button></td>`);
+      $tableRow.append(`<td><button id='edit-form-${i}' class="edit-point btn btn-purple text-white my-2">Edit</button></td>`);
+      $(`#edit-form-${i}`).click(() => {
+        appendForm(buildEditForm(data[i].id), i)
+      })
       $tableRow.append(`<td><a href=""><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg></a></td>`);
 
-      $table.append("</tr>");
+      $table.append("</tr>")
     }
   };
 
-  displayPoints(getPoints());
+
+  getPoints()
+  .then (value => {
+    displayPoints(value)
+  });
 
   //post request to create a new point
   $(".new-point").submit(function(event) {
@@ -61,9 +97,12 @@ $(document).ready(function() {
     const post_url = $(this).attr("action");
 
     $.post(post_url, serialData, () => {
-      displayPoints();
       $(".new-point")[0].reset();
       $(".add-new-point").slideUp();
+      getPoints()
+      .then (value => {
+        displayPoints(value)
+      });
 
     })
   });

@@ -24,7 +24,7 @@ const deletePoint = function (db, point_id) {
 
 const updatePoint = function (db, pointid, title, description) {
   return db.query(`
-    UPDATE table points
+    UPDATE points
     SET title = $1,
         description = $2
     WHERE id = $3
