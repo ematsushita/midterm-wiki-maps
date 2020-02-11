@@ -4,6 +4,7 @@ const getPoints = function(db, listId) {
     FROM points
     LEFT JOIN favourites ON points.list_id = favourites.list_id
     WHERE points.list_id = $1
+    ORDER BY points.id
   `, [listId]);
 };
 
