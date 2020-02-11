@@ -36,7 +36,7 @@ $(document).ready(function() {
 
     const form = `
     <tr class="new-row">
-    <td colspan="3">
+    <td colspan="1">
     <div class=“update-point-form my-3">
       <form class="update-point" action="/points/${listId}/update/${pointId}" type="submit">
 
