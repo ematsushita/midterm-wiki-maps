@@ -3,48 +3,38 @@ const { getPoints, addPoint, deletePoint, updatePoint } = require('./api/pointsA
 const router  = express.Router();
 
 module.exports = (db) => {
+
+  //get array of points objects for rendering
   router.get("/:listid", (req, response) => {
 
     getPoints(db, req.params.listid)
-      .then(res => {
-        return response.json(res.rows);
-      });
+      .then(res => response.json(res.rows));
   });
 
-
-  //Add a new point to a list
+  //Add a new point to a list given its id
   router.post("/:listid/add", (req, response) => {
     const ownerId = req.session.user.id;
     const listId = req.params.listid;
     const { title, description, imgUrl, latitude, longitude } = req.body;
 
     addPoint(db, ownerId, listId, title, description, imgUrl, latitude, longitude)
-      .then(res => {
-        response.status(201).send();
-      });
+      .then(() => response.status(201).send());
   });
-
 
   //Update title/description of a point
   router.post("/:listid/update/:pointid", (req, response) => {
     const { pointid } = req.params;
-    const { title, description } = req.body;
+    const { title, description, imgUrl } = req.body;
 
     updatePoint(db, pointid, title, description, imgUrl)
-      .then(res => {
-        response.status(201).send();
-      });
+      .then(() => response.status(201).send());
   });
-
 
   //Delete a point from a list
   router.post("/:listid/remove/:pointid", (req, response) => {
-    const pointId = req.params.pointid;
 
-    deletePoint(db, pointId)
-      .then(res => {
-        response.status(201).send();
-      });
+    deletePoint(db, req.params.pointid)
+      .then(() => response.status(201).send());
   });
 
   return router;

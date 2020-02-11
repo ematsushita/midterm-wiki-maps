@@ -14,6 +14,8 @@
 
 [ ] update ERD to  include lat/lng
 
+[ ] when not logged in, maps should display under "explore other lists"
+
 ## Enhancements
 
 [ ] The edit point button does not hide the form when you click it again

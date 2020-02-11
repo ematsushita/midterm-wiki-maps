@@ -22,7 +22,7 @@
 
     <script>
       //puts the list Id from the URL into the global scope for use across functions
-      const listId = <%= list.id %>;
+      const listId = <%= listId %>;
     </script>
   </head>
 
@@ -49,7 +49,7 @@
 
     <!-- Create new Point form -->
     <section class="add-new-point">
-      <form class="new-point" action="/points/<%= list.id %>/add" type="submit">
+      <form class="new-point" action="/points/<%= listId %>/add" type="submit">
         <div class="form-group">
           <label class="form-header">Title</label>
           <input required name="title" type="text" class="form-control" placeholder="Title">
