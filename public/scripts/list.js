@@ -1,29 +1,36 @@
 $(document).ready(function() {
 
   const updatePointForm = function(formData, url) {
-    console.log("clicked")
-    console.log("updated")
-    console.log("url: ", url)
-    console.log("form data: ", formData)
+    console.log("clicked");
+    console.log("updated");
+    console.log("url: ", url);
+    console.log("form data: ", formData);
 
 
     $.post(url, formData, () => {
       getPoints()
-      .then (value => {
-        displayPoints(value)
-      });
-    })
-  }
+        .then(value => {
+          displayPoints(value);
+        });
+    });
+  };
 
   const setListAttr = function() {
     $.get(`/lists/${listId}/attributes`, function(data) {
       $("#list-title").text(data.title);
       $("#list-desc").text(data.description);
+
+      //adds toggler to heart icon
+      $(".heart-icon")
+        .on("click", () => {
+          const mapFavIcon = $('.heart-icon');
+          mapFavIcon.toggleClass("favourited-heart");
+          return toggleFav(listId, data.owner_id);
+        });
     });
   };
 
   setListAttr();
-
 
   const buildEditForm = function(pointId) {
 
@@ -48,21 +55,22 @@ $(document).ready(function() {
     </div>
     </td>
     </tr>
-    `
+    `;
     return form;
-  }
+  };
 
   const appendForm = function(form, i) {
     $(".new-row").remove();
-    console.log($("#points-table-body tr").eq(i))
-    $("#points-table-body tr").eq(i + 1).after(form)
+    console.log($("#points-table-body tr").eq(i));
+    $("#points-table-body tr").eq(i + 1).after(form);
     $(".update-point").submit((event) => {
       event.preventDefault();
       const serialData = $('.update-point').serialize();
       const post_url = $('.update-point').attr("action");
 
-      updatePointForm(serialData, post_url)})
-  }
+      updatePointForm(serialData, post_url);
+    });
+  };
 
 
   const displayPoints = function(data) {
@@ -76,19 +84,19 @@ $(document).ready(function() {
       $tableRow.append(`<td>${data[i].title}</td>`);
       $tableRow.append(`<td><button id='edit-form-${i}' class="edit-point btn btn-purple text-white my-2">Edit</button></td>`);
       $(`#edit-form-${i}`).click(() => {
-        appendForm(buildEditForm(data[i].id), i)
-      })
+        appendForm(buildEditForm(data[i].id), i);
+      });
       $tableRow.append(`<td><a href=""><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg></a></td>`);
 
-      $table.append("</tr>")
+      $table.append("</tr>");
     }
   };
 
 
   getPoints()
-  .then (value => {
-    displayPoints(value)
-  });
+    .then(value => {
+      displayPoints(value);
+    });
 
   //post request to create a new point
   $(".new-point").submit(function(event) {
@@ -100,12 +108,10 @@ $(document).ready(function() {
       $(".new-point")[0].reset();
       $(".add-new-point").slideUp();
       getPoints()
-      .then (value => {
-        displayPoints(value)
-      });
+        .then(value => {
+          displayPoints(value);
+        });
 
-    })
+    });
   });
-
-
-})
+});
