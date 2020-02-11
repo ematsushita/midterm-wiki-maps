@@ -20,7 +20,7 @@
 
 - As an authenticated user, I want to be able to remove points on a map so I can declutter them 
 
-- As a user, I want to be able to add maps to my favourites so I have easy access to them 
+- [x] As a user, I want to be able to add maps to my favourites so I have easy access to them 
 
 - [x] As a user, I want to be able to have a list of all of my favourited maps in a list so I have easy access to them
 
@@ -30,4 +30,4 @@
 
 - [x] As an authenticated user, I want to be able to update a map so I can keep its title and description up to date 
 
-- As an authenticated user, I want to be able to remove maps from my favourites so that I can keep my list up to date 
+- [x] As an authenticated user, I want to be able to remove maps from my favourites so that I can keep my list up to date 

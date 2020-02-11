@@ -1,14 +1,14 @@
-const toggleFav = function(listId, userId) {
-  return $.post(`/favourites/${listId}`, `userId=${userId}`, (data) => {
-    console.log(data);
-    const favIcon = $('.list-item[data-list-id="' + listId + '"] > td > svg');
-    favIcon.toggleClass("favourited-heart");
-  });
-};
-
 $(document).ready(function() {
 
+  const toggleFav = function(listId, userId) {
+    return $.post(`/favourites/${listId}`, `userId=${userId}`, () => {
+      const favIcon = $('.list-item[data-list-id="' + listId + '"] > td > svg');
+      favIcon.toggleClass("favourited-heart");
+    });
+  };
+
   const createTableRow = function(row) {
+
     const $title = $("<h6>")
       .text(row.title);
 
@@ -17,7 +17,12 @@ $(document).ready(function() {
       .append($title);
 
     const $heart = $('<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>')
-      .on("click", () => toggleFav(row.id, row.owner_id));
+      .on("click", () => {
+        toggleFav(row.id, row.owner_id);
+        renderTables();
+      });
+
+    if (row.fave_id) $heart.addClass("favourited-heart");
 
     const $heartCell = $("<td>")
       .addClass("align-middle")
@@ -53,14 +58,17 @@ $(document).ready(function() {
     });
   };
 
+  const renderTables = function() {
+    //Loop through lists to render on homepage
+    const paths = ["favs", "myMaps", "myContributions", "allMaps"];
+    const containers = [$("#favs-container"), $("#my-maps-container"), $("#my-contributions-container"), $("#all-maps-container") ];
 
-  //Loop through lists to render on homepage
-  const paths = ["favs", "myMaps", "myContributions", "allMaps"];
-  const containers = [$("#favs-container"), $("#my-maps-container"), $("#my-contributions-container"), $("#all-maps-container") ];
+    for (let i = 0; i < paths.length; i++) {
+      loadTableItems(containers[i], paths[i]);
+    }
+  };
 
-  for (let i = 0; i < paths.length; i++) {
-    loadTableItems(containers[i], paths[i]);
-  }
+  renderTables();
 
   //Toggles the arrow in the new list form
   const arrowToggle = function(el) {

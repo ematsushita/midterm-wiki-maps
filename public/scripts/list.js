@@ -19,12 +19,15 @@ $(document).ready(function() {
     $.get(`/lists/${listId}/attributes`, function(data) {
       $("#list-title").text(data.title);
       $("#list-desc").text(data.description);
+      const $heartIcon = $(".heart-icon");
+      console.log("heart: ", data.fave_id);
+      if (data.fave_id) $heartIcon.addClass("favourited-heart");
 
       //adds toggler to heart icon
-      $(".heart-icon")
+      $heartIcon
         .on("click", () => {
-          const mapFavIcon = $('.heart-icon');
-          mapFavIcon.toggleClass("favourited-heart");
+          const $mapFavIcon = $('.heart-icon');
+          $mapFavIcon.toggleClass("favourited-heart");
           return toggleFav(listId, data.owner_id);
         });
     });
@@ -61,7 +64,6 @@ $(document).ready(function() {
 
   const appendForm = function(form, i) {
     $(".new-row").remove();
-    console.log($("#points-table-body tr").eq(i));
     $("#points-table-body tr").eq(i + 1).after(form);
     $(".update-point").submit((event) => {
       event.preventDefault();
