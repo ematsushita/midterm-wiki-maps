@@ -80,7 +80,7 @@ $(document).ready(function() {
     const $table = $("#points-table-body");
     $table.empty();
 
-    for (let i = 0; i < data.length; i++) {
+    for (let i = 0; i < data.length+1; i++) {
       $table.append(`<tr id=list-item-${i}>`);
       const $tableRow = $table.last();
 
@@ -112,6 +112,7 @@ $(document).ready(function() {
 
   //post request to create a new point
   $(".new-point").submit(function(event) {
+    console.log("in submit point")
     event.preventDefault();
     const serialData = $(this).serialize();
     const post_url = $(this).attr("action");
