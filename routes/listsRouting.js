@@ -46,7 +46,14 @@ module.exports = (db) => {
 
   //point user to front page with all necessary map list data
   router.get("/", (req, response) => {
-    getMapLists(db, req.session.user.id)
+
+    //checks if user is logged in. If not, sets userId to 0
+    let userId;
+    (req.session.user)
+      ? userId = req.session.user.id
+      : userId = 0;
+
+    getMapLists(db, userId)
       .then(res => response.json(res));
   });
 

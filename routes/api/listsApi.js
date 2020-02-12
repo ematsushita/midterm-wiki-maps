@@ -69,6 +69,9 @@ const getMyContributions = function(db, userId) {
 
 //Returns a list of all list objects not already in favourites, owned, or contributed to by a user
 const getAllOtherMaps = function(db, userId) {
+
+  console.log(userId);
+
   return db.query(`
     SELECT DISTINCT lists.id, lists.owner_id, lists.title, lists.description
     FROM lists
