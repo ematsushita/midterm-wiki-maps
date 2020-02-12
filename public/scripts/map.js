@@ -10,25 +10,25 @@ let activePoints = [];
 let newMarker;
 
 
-  //Function to loop through markers
-  const placeMarkersPoints = function(markerPoints){
-    markerPoints.forEach(point => {
-      const location = {lat: point.latitude, lng: point.longitude};
-      newMarker = placeMarker(location, point, map);
-      activePoints.push(newMarker);
+//Function to loop through markers
+const placeMarkersPoints = function(markerPoints) {
+  markerPoints.forEach(point => {
+    const location = {lat: point.latitude, lng: point.longitude};
+    newMarker = placeMarker(location, point, map);
+    activePoints.push(newMarker);
 
-      //extends bounds of all points
-      bounds.extend(location);
-    });
-  }
-  //Function to clear markers
-  const clearMarkers = function(activePoints) {
-    for (var i = 0; i < activePoints.length; i++) {
-      activePoints[i].setMap(null);
-    }
-    activePoints = [];
-  }
+    //extends bounds of all points
+    bounds.extend(location);
+  });
+};
 
+//Function to clear markers
+const clearMarkers = function(activePoints) {
+  for (let i = 0; i < activePoints.length; i++) {
+    activePoints[i].setMap(null);
+  }
+  activePoints = [];
+};
 
 //Get user's location to set map center if there are no active points
 const userLocation = function() {
@@ -36,9 +36,9 @@ const userLocation = function() {
     navigator.geolocation.getCurrentPosition(position => {
       defaultPos["lat"] = position.coords.latitude;
       defaultPos["lng"] = position.coords.longitude;
-    })
+    });
   }
-}
+};
 
 userLocation();
 
@@ -88,46 +88,46 @@ const initMap = function(mapCentre, markerPoints) {
 
   //loops through points and places a marker for each
   if (markerPoints.length) {
-    placeMarkersPoints(markerPoints)
+    placeMarkersPoints(markerPoints);
     map.fitBounds(bounds, 5);
   }
 
   //autocomplete function
-  var input = document.getElementById('autocomplete');
+  let input = document.getElementById('autocomplete');
 
-  var autocomplete = new google.maps.places.Autocomplete(input);
+  let autocomplete = new google.maps.places.Autocomplete(input);
   autocomplete.bindTo('bounds', map);
 
   autocomplete.addListener('place_changed', function() {
-      //testMarker.setVisible(false);
-      var place = autocomplete.getPlace();
-      if (!place.geometry) {
-          window.alert("Autocomplete's returned place contains no geometry");
-          return;
-        }
+    //testMarker.setVisible(false);
+    let place = autocomplete.getPlace();
+    if (!place.geometry) {
+      window.alert("Autocomplete's returned place contains no geometry");
+      return;
+    }
 
-      if (place.geometry.viewport) {
-        map.fitBounds(place.geometry.viewport);
-        const newLocation = {lat: place.geometry.location.lat(), lng: place.geometry.location.lng()};
+    if (place.geometry.viewport) {
+      map.fitBounds(place.geometry.viewport);
+      const newLocation = {lat: place.geometry.location.lat(), lng: place.geometry.location.lng()};
 
-        testMarker = new google.maps.Marker({
-          position: newLocation,
-          map: map
-        });
-        bounds.extend(newLocation)
+      testMarker = new google.maps.Marker({
+        position: newLocation,
+        map: map
+      });
+      bounds.extend(newLocation);
 
-        google.maps.event.addListener(testMarker, 'click', function() {
-          $(".add-new-point").slideDown();
-          $(".form-latitude").val(place.geometry.location.lat())
-          $(".form-longitude").val(place.geometry.location.lng())
+      google.maps.event.addListener(testMarker, 'click', function() {
+        $(".add-new-point").slideDown();
+        $(".form-latitude").val(place.geometry.location.lat());
+        $(".form-longitude").val(place.geometry.location.lng());
 
-        });
+      });
 
-        } else {
-            map.setCenter(place.geometry.location);
-            map.setZoom(17);
-        }
-    });
+    } else {
+      map.setCenter(place.geometry.location);
+      map.setZoom(17);
+    }
+  });
 
 
 };
@@ -137,6 +137,12 @@ const getBounds = function() {
 };
 
 $(document).ready(function() {
+
+  $(".add-point-dropdown").click(function(event) {
+    event.preventDefault();
+    $(".add-new-point").slideToggle();
+  });
+
   getBounds()
     .then(value => {
       if (value.east !== null) {
@@ -149,15 +155,9 @@ $(document).ready(function() {
     })
     .then(value => {
       if (bounds === undefined) {
-        initMap(defaultPos, value)
+        initMap(defaultPos, value);
       } else {
         initMap(bounds.getCenter(), value);
       }
     });
-
-  // //sets the search box
-  // searchBox = new google.maps.places.SearchBox(document.getElementById('autocomplete'), {bounds: bounds});
-
-  // //sets the Places service for searching
-  // service = new google.maps.places.PlacesService(map);
 });

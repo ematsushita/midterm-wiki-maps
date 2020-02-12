@@ -51,8 +51,6 @@ $(document).ready(function() {
           arrowToggle($downArrow);
         });
 
-      console.log($newRow);
-
       $newRow.appendTo($("#favs-accordion"));
       $newRow.slideDown("slow");
     }
@@ -185,12 +183,6 @@ $(document).ready(function() {
     arrowToggle($("#down-arrow"));
     arrowToggle($("#up-arrow"));
   });
-
-  $(".add-point-dropdown").click(function(event) {
-    event.preventDefault();
-    $(".add-new-point").slideToggle();
-  });
-
 });
 
 

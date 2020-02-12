@@ -1,21 +1,18 @@
 $(document).ready(function() {
 
-
-
   //Post request to create a new point
   $(".new-point").submit(function(event) {
     event.preventDefault();
     const serialData = $(this).serialize();
-    const post_url = $(this).attr("action");
+    const postUrl = $(this).attr("action");
 
-    $.post(post_url, serialData, () => {
+    $.post(postUrl, serialData, () => {
       $(".new-point")[0].reset();
       $(".add-new-point").slideUp();
       getPoints()
         .then(value => {
           displayPoints(value);
         });
-
     });
   });
 
@@ -25,7 +22,7 @@ $(document).ready(function() {
       getPoints()
         .then(value => {
           displayPoints(value);
-        })
+        });
     });
   };
 
@@ -38,24 +35,25 @@ $(document).ready(function() {
       const data = $('.update-point').serialize();
       const url = $('.update-point').attr("action");
 
-      updatePointForm(url, data)
+      updatePointForm(url, data);
     });
   };
 
   //Function to send delete post request when delete button is clicked
-  const deletePointButton = function (i) {
+  const deletePointButton = function(i) {
     event.preventDefault();
-        const post_url = $(`#delete-btn-${i}`).attr("action");
-        $.post(post_url, () => {
-          getBounds()
-          getPoints()
-          .then(value => {
-            clearMarkers(activePoints)
-            placeMarkersPoints(value)
-            displayPoints(value)
-          });
-        })
-  }
+    const post_url = $(`#delete-btn-${i}`).attr("action");
+    $.post(post_url, () => {
+      getBounds();
+      getPoints()
+        .then(value => {
+          clearMarkers(activePoints);
+          placeMarkersPoints(value);
+          displayPoints(value);
+        });
+    });
+  };
+
 
   const setListAttr = function() {
     $.get(`/lists/${listId}/attributes`, function(data) {
@@ -133,13 +131,12 @@ $(document).ready(function() {
     return $tableRow;
   };
 
-
   //Function to loop through array of Points objects and display them in a table
   const displayPoints = function(data) {
     const $table = $("#points-table-body");
     $table.empty();
 
-    for (let i = 0; i < data.length+1; i++) {
+    for (let i = 0; i < data.length + 1; i++) {
       $table.append(`<tr id=list-item-${i}>`);
       const $tableRow = $table.last();
 
@@ -147,7 +144,7 @@ $(document).ready(function() {
       $tableRow.append(`<td><button id='edit-form-${i}' class="edit-point btn btn-purple text-white my-2">Edit</button></td>`);
       $(`#edit-form-${i}`).click(() => {
         if ($(`#edit-row-${data[i].id}`).length) {
-          $(`#edit-row-${data[i].id}`).remove()
+          $(`#edit-row-${data[i].id}`).remove();
         } else {
           appendForm(buildEditForm(data[i]), i);
         }
@@ -156,7 +153,7 @@ $(document).ready(function() {
       $tableRow.append(`<td><svg id='delete-btn-${i}' action="/points/${data[i].list_id}/remove/${data[i].id}" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg></td>`);
       $(`#delete-btn-${i}`).click(() => {
         deletePointButton(i);
-      })
+      });
       $table.append("</tr>");
     }
   };

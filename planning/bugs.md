@@ -2,7 +2,6 @@
 
 [ ] when you hit enter in the search bar, do not lower the hidden form
 
-[ ] Edit point form should slide up if you click it again
 [ ] The edit point form has weird display
 
 [ ] List map view should show amount of favourites of a list
@@ -13,9 +12,6 @@
 [ ] Title and description of map does not show if user is not logged in
 
 ## Enhancements
-
-[ ] Map should dynamically add points when they are added to the list
-[ ] Map should dynamically remove points when they are deleted from the lsit
 
 [ ] Map should pre-populate add-point form with lat/lng when clicked
 
