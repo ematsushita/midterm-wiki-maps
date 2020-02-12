@@ -2,9 +2,8 @@
 // Fave ID is returned so front end can show correct favourite status
 const getPoints = function(db, listId) {
   return db.query(`
-    SELECT points.*, favourites.id as fave_id
+    SELECT points.*
     FROM points
-      LEFT JOIN favourites ON points.list_id = favourites.list_id
     WHERE points.list_id = $1
     ORDER BY points.id
   `, [listId]);
