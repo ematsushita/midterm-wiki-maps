@@ -4,10 +4,36 @@ let infoWindow = null;
 let mapCentre;
 let bounds;
 let searchBox;
+let testMarker;
+let defaultPos = {};
+let activePoints = [];
 
 
-let defaultPos = {}
+  //Function to loop through markers
+  const placeMarkersPoints = function(markerPoints){
+    console.log("in place markers")
+    markerPoints.forEach(point => {
+      const location = {lat: point.latitude, lng: point.longitude};
+      placeMarker(location, point, map);
+      activePoints.push(location);
 
+      //extends bounds of all points
+      bounds.extend(location);
+    });
+  }
+  //Function to clear markers
+  const clearMarkers = function(activePoints) {
+    console.log("in clear markers")
+    console.log("acitve points before: ", activePoints)
+    for (var i = 0; i < activePoints.length; i++) {
+      activePoints[i]=null;
+    }
+    activePoints = [];
+    console.log("active points after: ", activePoints)
+  }
+
+
+//Get user's location to set map center if there are no active points
 const userLocation = function() {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(position => {
@@ -58,42 +84,25 @@ const placeMarker = function(marker, point, map) {
 };
 
 //renders the map given a centre point and a list of map points
-const initMap = function(mapCentre = defaultPos, markerPoints) {
+const initMap = function(mapCentre, markerPoints) {
   //sets map variable to map class
   map = new google.maps.Map(document.getElementById('map'), {zoom: 10, center: mapCentre});
 
 
   //loops through points and places a marker for each
   if (markerPoints.length) {
-    markerPoints.forEach(point => {
-      const location = {lat: point.latitude, lng: point.longitude};
-      placeMarker(location, point, map);
-
-      //extends bounds of all points
-      bounds.extend(location);
-    });
-
-    //sets map bounds
+    placeMarkersPoints(markerPoints)
     map.fitBounds(bounds, 5);
   }
 
-
-    function placeMarkerAndPanTo(latLng, map) {
-      var marker = new google.maps.Marker({
-        position: latLng,
-        map: map
-      });
-      map.panTo(latLng);
-    }
-
-
+  //autocomplete function
   var input = document.getElementById('autocomplete');
 
   var autocomplete = new google.maps.places.Autocomplete(input);
   autocomplete.bindTo('bounds', map);
 
   autocomplete.addListener('place_changed', function() {
-
+      //testMarker.setVisible(false);
       var place = autocomplete.getPlace();
       if (!place.geometry) {
           window.alert("Autocomplete's returned place contains no geometry");
@@ -101,12 +110,10 @@ const initMap = function(mapCentre = defaultPos, markerPoints) {
         }
 
       if (place.geometry.viewport) {
-        console.log("geometry: ", place.geometry)
         map.fitBounds(place.geometry.viewport);
         const newLocation = {lat: place.geometry.location.lat(), lng: place.geometry.location.lng()};
 
-        //const testMarker = placeMarkerAndPanTo(newLocation, map)
-        const testMarker = new google.maps.Marker({
+        testMarker = new google.maps.Marker({
           position: newLocation,
           map: map
         });

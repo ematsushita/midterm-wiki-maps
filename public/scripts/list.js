@@ -1,5 +1,7 @@
 $(document).ready(function() {
 
+
+
   //Post request to create a new point
   $(".new-point").submit(function(event) {
     event.preventDefault();
@@ -19,9 +21,7 @@ $(document).ready(function() {
 
   //Function to send post request to edit point data when Update button is clicked
   const updatePointForm = function(url, data) {
-    console.log('in update form')
     $.post(url, data, () => {
-      console.log("in post")
       getPoints()
         .then(value => {
           displayPoints(value);
@@ -47,9 +47,13 @@ $(document).ready(function() {
     event.preventDefault();
         const post_url = $(`#delete-btn-${i}`).attr("action");
         $.post(post_url, () => {
+          getBounds()
           getPoints()
           .then(value => {
-            displayPoints(value);
+            //clearMarkers(activePoints)
+            //placeMarkersPoints(value)
+            initMap(bounds.getCenter(), value)
+            displayPoints(value)
           });
         })
   }
@@ -132,6 +136,7 @@ $(document).ready(function() {
 
   //Function to loop through array of Points objects and display them in a table
   const displayPoints = function(data) {
+    console.log("Hello")
     const $table = $("#points-table-body");
     $table.empty();
 
