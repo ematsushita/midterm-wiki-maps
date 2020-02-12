@@ -71,6 +71,7 @@ form.new-map {
 
 form .form-header {
   font-weight: bold;
+  padding-left: 2rem;
 }
 
 .form-control {
@@ -79,18 +80,32 @@ form .form-header {
 }
 
 //Adding a new point to list
-
-.add-new-point {
-  width: 30%;
-  text-align: center;
-  display: flex;
-  justify-content: space-between;
-  border: 1px solid $brand-purple;
-  margin: 0 auto;
-  display: none;
+.second-header {
+  background-image: url(http://www.transparenttextures.com/patterns/bright-squares.png);
 }
 
+.new-point {
+  display: flex;
+  justify-content: center;
+  width: 65%;
+  margin: 0 auto;
+}
 
+.add-new-point {
+  width: 100%;
+  text-align: center;
+  display: none;
+  background-image: url(http://www.transparenttextures.com/patterns/bright-squares.png);
+}
+
+.add-point-dropdown {
+  color: white;
+}
+
+#add-point-button {
+  margin-left: 2.5vw;
+  margin-top: 1vw;
+}
 
 .update-point {
   text-align: center;
