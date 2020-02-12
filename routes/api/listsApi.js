@@ -8,17 +8,6 @@ const addList = function(db, ownerId, title, desc) {
   );
 };
 
-// Returns an array of objects
-//      { id, list_id, owner_id, title, description, img_url, longitude, latitude }
-// representing all the points on a given list
-const getPoints = function(db, listId) {
-  return db.query(`
-    SELECT * FROM points
-      WHERE list_id = $1
-    `, [listId]
-  );
-};
-
 // Returns a list object { id, owner_id, title, description, fave_id } given a list id
 // fave_id will be null if it has not been favourited given the user id
 const getList = function(db, userId, listId) {
@@ -80,6 +69,9 @@ const getMyContributions = function(db, userId) {
 
 //Returns a list of all list objects not already in favourites, owned, or contributed to by a user
 const getAllOtherMaps = function(db, userId) {
+
+  console.log(userId);
+
   return db.query(`
     SELECT DISTINCT lists.id, lists.owner_id, lists.title, lists.description
     FROM lists
@@ -99,13 +91,33 @@ const getAllOtherMaps = function(db, userId) {
   `, [userId]);
 };
 
+//Parent function to gather all map lists from the db for the front page
+const getMapLists = (db, userId) => {
+  const lists = {};
+
+  return getFavs(db, userId)
+    .then(res => {
+      lists.favs = res.rows;
+      return getMyMaps(db, userId);
+    })
+    .then(res => {
+      lists.myMaps = res.rows;
+      return getMyContributions(db, userId);
+    })
+    .then(res => {
+      lists.myContributions = res.rows;
+      return getAllOtherMaps(db, userId);
+    })
+    .then(res => {
+      lists.allMaps = res.rows;
+      return lists;
+    })
+    .catch(err => console.error(err.stack));
+};
+
 module.exports = {
   addList,
-  getPoints,
   getList,
   getBounds,
-  getFavs,
-  getMyMaps,
-  getMyContributions,
-  getAllOtherMaps
+  getMapLists
 };

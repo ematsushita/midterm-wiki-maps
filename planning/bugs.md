@@ -2,9 +2,9 @@
 
 [x] When a user loads a list which has no points, the map should still display.
 
-[x] The Edit point button does not show for the last point on a list
+[ ] The add point form picture field needs a proper placeholder text
 
-[ ] The add point form does not have a picture field
+[ ] The add point form lat/lng fields need proper placeholder text
 
 [x] The edit point form does not have a picture url field
 
@@ -12,9 +12,13 @@
 
 [ ] Unfavouriting maps is buggy between "favs" and "my maps"
 
-[x] update ERD to  include lat/lng
+[ ] update ERD to include lat/lng
+
+[x] when not logged in, maps should display under "explore other lists"
 
 ## Enhancements
+
+[ ] The edit point form has weird display
 
 [ ] The edit point button does not hide the form when you click it again
 
@@ -27,3 +31,5 @@
 [ ] Map should dynamically remove points when they are deleted from the lsit
 
 [ ] Map should pre-populate add-point form with lat/lng when clicked
+
+[ ] List map view should show amount of favourites of a list
