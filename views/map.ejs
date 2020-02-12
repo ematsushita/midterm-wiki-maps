@@ -32,7 +32,7 @@
     <%- include('./partials/_header') %>
 
     <!--Search/Add Bar-->
-    <div class="container-fluid my-3">
+    <div class="container-fluid py-3 second-header">
       <form class="active-purple-3 active-purple-4">
         <div class="row align-items-center">
           <div class="col-8">
@@ -49,26 +49,26 @@
 
     <!-- Create new Point form -->
     <section class="add-new-point">
-      <form class="new-point" action="/points/<%= listId %>/add" type="submit">
-        <div class="form-group">
+      <form class="form-row new-point" action="/points/<%= listId %>/add" type="submit">
+        <div class="form-group col-md-4">
           <label class="form-header">Title</label>
           <input required name="title" type="text" class="form-control" placeholder="Title">
         </div>
-        <div class="form-group">
+        <div class="form-group col-md-4">
           <label class="form-header">Description</label>
           <textarea required name="description" class="form-control" placeholder="Description"></textarea>
         </div>
-        <div class="form-group">
+        <div class="form-group col-md-4">
           <label class="form-header">Image Url</label>
           <textarea required name="imgUrl" class="form-control" placeholder="Image URL"></textarea>
         </div>
-        <div class="form-group">
+        <div class="form-group col-md-3">
           <label class="form-header">Latitude</label>
-          <input required name="latitude" class="form-control form-latitude">
+          <input required name="latitude" class="form-control form-latitude" placeholder="Latitude">
         </div>
-        <div class="form-group">
+        <div class="form-group col-md-3">
           <label class="form-header">Longitude</label>
-          <input required name="longitude" class="form-control form-longitude">
+          <input required name="longitude" class="form-control form-longitude" placeholder="Longitude">
         </div>
         <form>
             <button class="btn btn-purple text-white my-2">Add Point!</button>
@@ -80,7 +80,7 @@
     <div id="map"></div>
 
     <!--Map Title/Desc -->
-    <div class="container">
+    <div class="container title-header">
       <div class="title-container">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart heart-icon"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
         <span id="list-title">

@@ -79,18 +79,31 @@ form .form-header {
 }
 
 //Adding a new point to list
+.second-header {
+  background-image: url(http://www.transparenttextures.com/patterns/bright-squares.png);
+}
+
+.new-point {
+  background-image: url(http://www.transparenttextures.com/patterns/bright-squares.png);
+}
 
 .add-new-point {
-  width: 30%;
+  width: 70%;
   text-align: center;
   display: flex;
   justify-content: space-between;
-  border: 1px solid $brand-purple;
-  margin: 0 auto;
+  margin: auto;
   display: none;
+  //background-image: url(http://www.transparenttextures.com/patterns/bright-squares.png);
 }
 
+.add-point-dropdown {
+  color: white;
+}
 
+#add-point-button {
+  padding: 10px;
+}
 
 .update-point {
   text-align: center;
