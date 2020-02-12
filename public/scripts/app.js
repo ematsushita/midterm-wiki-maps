@@ -14,12 +14,45 @@ $(document).ready(function() {
   //toggle pos alters the visible state of favourites by adding or removing them from lists based on user input
   const togglePos = function(row) {
     const $rows = $(`.card-container-${row.id}`);
+    const $row1 = $rows[0];
 
     if ($rows.length > 1) {
-      const $killThisRow = $rows[0];
-      $killThisRow.remove();
+      $row1.remove();
     } else {
-      const $newRow = $rows.first().clone(true).hide();
+      const $newRow = $rows.clone(true).hide();
+      $newRow.children().removeClass("show");
+
+      console.log($newRow);
+
+      const $newRowHeader = $newRow.children().first();
+      $newRowHeader.attr("id", `heading-favs-${row.id}`);
+
+      const $newRowBody = $newRowHeader.next();
+      $newRowBody.attr("id", `collapse-favs-${row.id}`);
+      $newRowBody.attr("aria-labelledby", `heading-favs-${row.id}`);
+      $newRowBody.attr("data-parent", `#favs-accordion`);
+
+      const $newRowHeadingContainer = $newRowHeader.children().first().next();
+      $newRowHeadingContainer.attr("data-target", `#collapse-favs-${row.id}`);
+      $newRowHeadingContainer.attr("aria-controls", `collapse-favs-${row.id}`);
+
+
+      const $newRowHeading = $newRowHeadingContainer.children().first();
+      const $upArrow = $newRowHeading.children().first().next();
+      const $downArrow = $upArrow.next();
+
+      $upArrow.attr("id", `up-arrow-favs-${row.id}`);
+      $downArrow.attr("id", `down-arrow-favs-${row.id}`);
+
+      $newRowHeadingContainer.off();
+      $newRowHeadingContainer
+        .on("click", () => {
+          arrowToggle($upArrow);
+          arrowToggle($downArrow);
+        });
+
+      console.log($newRow);
+
       $newRow.appendTo($("#favs-accordion"));
       $newRow.slideDown("slow");
     }
@@ -55,7 +88,7 @@ $(document).ready(function() {
       .attr('data-toggle', 'collapse')
       .attr('data-target', `#collapse-${path}-${card.id}`)
       .attr('aria-expanded', 'true')
-      .attr('area-controls', `collapse-${path}-${card.id}`)
+      .attr('aria-controls', `collapse-${path}-${card.id}`)
       .appendTo($cardHeader)
       .on("click", () => {
         const $upArrow = $(`#up-arrow-${path}-${card.id}`);
