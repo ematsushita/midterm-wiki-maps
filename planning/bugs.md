@@ -8,8 +8,6 @@
 
 [ ] The edit point form does not have a picture url field
 
-[ ] Unfavouriting maps is buggy between "favs" and "my maps"
-
 [ ] update ERD to include lat/lng
 
 [ ] when you hit enter in the search bar, do not lower the hidden form

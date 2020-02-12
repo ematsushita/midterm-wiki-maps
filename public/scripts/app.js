@@ -11,13 +11,13 @@ $(document).ready(function() {
       });
   };
 
+  //toggle pos alters the visible state of favourites by adding or removing them from lists based on user input
   const togglePos = function(row) {
     const $rows = $(`[data-list-id="${row.id}"]`);
+
     if ($rows.length > 1) {
-      console.log("I should get removed)");
       $rows[0].remove();
     } else {
-      console.log("I should be added to favs");
       const $newRow = $rows.first().clone(true).hide();
       $newRow.appendTo($("#favs-container"));
       $newRow.slideDown("slow");
