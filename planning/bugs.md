@@ -14,6 +14,10 @@
 
 [ ] Map view no longer allows user to toggle favourite (button works, nothing actually happens)
 
+[ ] Remove add list button on top left
+
+[ ] Points do not add!
+
 ## Enhancements
 
 [ ] The edit point form has weird display
