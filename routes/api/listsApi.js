@@ -63,7 +63,11 @@ const getMyMaps = function(db, userId) {
 //Returns a list of all the list objects with at least one point contributed by a user
 const getMyContributions = function(db, userId) {
   return db.query(`
-    SELECT lists.id, lists.owner_id, lists.title, lists.description
+    SELECT lists.*,
+      CASE WHEN EXISTS (SELECT FROM favourites WHERE list_id = lists.id AND user_id = $1)
+        THEN 'true'
+        ELSE NULL
+      END as fave_id
     FROM lists
       JOIN points ON points.list_id = lists.id
     WHERE points.owner_id = $1 AND NOT lists.owner_id = $1
@@ -76,14 +80,13 @@ const getAllOtherMaps = function(db, userId) {
   console.log(userId);
 
   return db.query(`
-    SELECT DISTINCT lists.id, lists.owner_id, lists.title, lists.description
+    SELECT DISTINCT lists.*,
+    CASE WHEN EXISTS (SELECT FROM favourites WHERE list_id = lists.id AND user_id = $1)
+        THEN 'true'
+        ELSE NULL
+      END as fave_id
     FROM lists
     WHERE NOT lists.owner_id = $1
-      AND lists.id NOT IN (
-        SELECT list_id
-        FROM favourites
-        WHERE user_id = $1
-      )
       AND lists.id NOT IN (
         SELECT lists.id
         FROM lists
