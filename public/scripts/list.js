@@ -42,8 +42,8 @@ $(document).ready(function() {
   //Function to send delete post request when delete button is clicked
   const deletePointButton = function(i) {
     event.preventDefault();
-    const post_url = $(`#delete-btn-${i}`).attr("action");
-    $.post(post_url, () => {
+    const postUrl = $(`#delete-btn-${i}`).attr("action");
+    $.post(postUrl, () => {
       getBounds();
       getPoints()
         .then(value => {
