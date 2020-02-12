@@ -13,7 +13,7 @@ module.exports = (db) => {
 
   //Add a new point to a list given its id
   router.post("/:listid/add", (req, response) => {
-    const ownerId = 1//req.session.user.id;
+    const ownerId = req.session.user.id;
     const listId = req.params.listid;
     const { title, description, imgUrl, latitude, longitude } = req.body;
 
