@@ -5,6 +5,22 @@ let mapCentre;
 let bounds;
 let searchBox;
 
+
+let defaultPos = {}
+
+const userLocation = function() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(position => {
+      defaultPos["lat"] = position.coords.latitude;
+      defaultPos["lng"] = position.coords.longitude;
+    })
+  }
+}
+
+userLocation();
+
+
+
 //builds an infoWindow class for display on a map given data from a point
 const buildInfoWindow = function(title, desc, imgUrl) {
   infoWindow = null;
@@ -44,22 +60,25 @@ const placeMarker = function(marker, point, map) {
 };
 
 //renders the map given a centre point and a list of map points
-const initMap = function(mapCentre, markerPoints) {
-
+const initMap = function(mapCentre = defaultPos, markerPoints) {
   //sets map variable to map class
   map = new google.maps.Map(document.getElementById('map'), {zoom: 10, center: mapCentre});
 
+
   //loops through points and places a marker for each
-  markerPoints.forEach(point => {
-    const location = {lat: point.latitude, lng: point.longitude};
-    placeMarker(location, point, map);
+  if (markerPoints.length) {
+    markerPoints.forEach(point => {
+      const location = {lat: point.latitude, lng: point.longitude};
+      placeMarker(location, point, map);
 
-    //extends bounds of all points
-    bounds.extend(location);
-  });
+      //extends bounds of all points
+      bounds.extend(location);
+    });
 
-  //sets map bounds
-  map.fitBounds(bounds, 5);
+    //sets map bounds
+    map.fitBounds(bounds, 5);
+  }
+
 };
 
 const getBounds = function() {
@@ -69,14 +88,20 @@ const getBounds = function() {
 $(document).ready(function() {
   getBounds()
     .then(value => {
-      bounds = new google.maps.LatLngBounds({lat: value["south"], lng: value["west"]}, {lat: value["north"], lng: value["east"]});
+      if (value.east !== null) {
+        bounds = new google.maps.LatLngBounds({lat: value["south"], lng: value["west"]}, {lat: value["north"], lng: value["east"]});
+      }
       return;
     })
     .then(() => {
       return getPoints();
     })
     .then(value => {
-      initMap(bounds.getCenter(), value);
+      if (bounds === undefined) {
+        initMap(defaultPos, value)
+      } else {
+        initMap(bounds.getCenter(), value);
+      }
     });
 
   //sets the search box

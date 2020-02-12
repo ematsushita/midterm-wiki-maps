@@ -1,18 +1,18 @@
 ## Bugs
 
-[ ] When a user loads a list which has no points, the map should still display.
+[x] When a user loads a list which has no points, the map should still display.
 
-[ ] The Edit point button does not show for the last point on a list
+[x] The Edit point button does not show for the last point on a list
 
 [ ] The add point form does not have a picture field
 
-[ ] The edit point form does not have a picture url field
+[x] The edit point form does not have a picture url field
 
 [ ] My Contributions shows multiples if there are multiple points added to a list
 
 [ ] Unfavouriting maps is buggy between "favs" and "my maps"
 
-[ ] update ERD to  include lat/lng
+[x] update ERD to  include lat/lng
 
 ## Enhancements
 
