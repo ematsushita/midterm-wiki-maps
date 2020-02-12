@@ -127,6 +127,7 @@ $(document).ready(function() {
 
     const $tableRow = $("<tr>")
       .addClass("new-row")
+      .attr("id", `edit-row-${point.id}`)
       .append($tableCell);
 
     return $tableRow;
@@ -135,7 +136,6 @@ $(document).ready(function() {
 
   //Function to loop through array of Points objects and display them in a table
   const displayPoints = function(data) {
-    console.log("Hello")
     const $table = $("#points-table-body");
     $table.empty();
 
@@ -146,8 +146,13 @@ $(document).ready(function() {
       $tableRow.append(`<td>${data[i].title}</td>`);
       $tableRow.append(`<td><button id='edit-form-${i}' class="edit-point btn btn-purple text-white my-2">Edit</button></td>`);
       $(`#edit-form-${i}`).click(() => {
-        appendForm(buildEditForm(data[i]), i);
+        if ($(`#edit-row-${data[i].id}`).length) {
+          $(`#edit-row-${data[i].id}`).remove()
+        } else {
+          appendForm(buildEditForm(data[i]), i);
+        }
       });
+
       $tableRow.append(`<td><svg id='delete-btn-${i}' action="/points/${data[i].list_id}/remove/${data[i].id}" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg></td>`);
       $(`#delete-btn-${i}`).click(() => {
         deletePointButton(i);
