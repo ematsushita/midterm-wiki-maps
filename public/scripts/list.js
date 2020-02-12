@@ -50,9 +50,9 @@ $(document).ready(function() {
           getBounds()
           getPoints()
           .then(value => {
-            //clearMarkers(activePoints)
-            //placeMarkersPoints(value)
-            initMap(bounds.getCenter(), value)
+            clearMarkers(activePoints)
+            placeMarkersPoints(value)
+            //initMap(bounds.getCenter(), value)
             displayPoints(value)
           });
         })

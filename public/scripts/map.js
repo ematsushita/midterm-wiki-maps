@@ -7,15 +7,15 @@ let searchBox;
 let testMarker;
 let defaultPos = {};
 let activePoints = [];
+let newMarker;
 
 
   //Function to loop through markers
   const placeMarkersPoints = function(markerPoints){
-    console.log("in place markers")
     markerPoints.forEach(point => {
       const location = {lat: point.latitude, lng: point.longitude};
-      placeMarker(location, point, map);
-      activePoints.push(location);
+      newMarker = placeMarker(location, point, map);
+      activePoints.push(newMarker);
 
       //extends bounds of all points
       bounds.extend(location);
@@ -23,13 +23,10 @@ let activePoints = [];
   }
   //Function to clear markers
   const clearMarkers = function(activePoints) {
-    console.log("in clear markers")
-    console.log("acitve points before: ", activePoints)
     for (var i = 0; i < activePoints.length; i++) {
-      activePoints[i]=null;
+      activePoints[i].setMap(null);
     }
     activePoints = [];
-    console.log("active points after: ", activePoints)
   }
 
 
