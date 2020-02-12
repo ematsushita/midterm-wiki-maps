@@ -34,7 +34,7 @@
 
         <!-- Button to add new list of points -->
         <div class="my-5 create-map-button-container">
-          <div id="new-list-form-toggler" class="btn btn-purple text-white">
+          <div id="new-list-form-toggler" class="btn btn-purple text-white" data-target="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
             <span>Create a new map! </span>
             <svg id="up-arrow" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-up"><polyline points="18 15 12 9 6 15"></polyline></svg>
             <svg id="down-arrow" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg>
@@ -42,7 +42,7 @@
         </div>
 
         <!-- Hidden Form -->
-        <div class="submit-new-list my-3">
+        <div class="submit-new-list my-3" class="collapse" id="collapseExample">
           <form class="new-map" action="/lists/create" method="POST">
 
             <div class="form-group">
@@ -63,7 +63,7 @@
     </header>
 
     <!--Favourites Table-->
-    <div class="container">
+    <div class="container mt-4">
       <h4>Favourites</h4>
       <table class="table">
         <tbody id="favs-container">
