@@ -18,7 +18,7 @@
 
 [ ] The edit point button does not hide the form when you click it again
 
-[ ] The edit point button should pre-populate with title and description that already exists
+[x] The edit point button should pre-populate with title and description that already exists
 
 [ ] The getPoints function on the map list page should order the query by points.id
 
