@@ -51,7 +51,7 @@ const getFavs = function(db, userId) {
 const getMyMaps = function(db, userId) {
   return db.query(`
     SELECT lists.*,
-    CASE WHEN EXISTS (SELECT FROM favourites WHERE list_id = $1)
+    CASE WHEN EXISTS (SELECT FROM favourites WHERE list_id = lists.id AND user_id = $1)
         THEN 'true'
         ELSE NULL
       END as fave_id
