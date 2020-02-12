@@ -72,31 +72,20 @@
       </div>
     </div>
 
-    <!-- Favourites Table
-    <div class="container mt-4">
-      <h4>Favourites</h4>
-      <table class="table">
-        <tbody id="favs-container">
-        </tbody>
-      </table>
-    </div> -->
-
     <!--My Maps Table-->
     <div class="container">
       <h4>My Maps</h4>
-      <table class="table">
-        <tbody id="my-maps-container">
-        </tbody>
-      </table>
+      <div class="accordion" id="myMaps-accordion">
+
+      </div>
     </div>
 
     <!--My Contributions Table-->
     <div class="container">
       <h4>My Contributions</h4>
-      <table class="table">
-        <tbody id="my-contributions-container">
-        </tbody>
-      </table>
+      <div class="accordion" id="myContributions-accordion">
+
+      </div>
     </div>
 
     <% } else { %>
@@ -115,10 +104,9 @@
       <% } else { %>
         <h5 class="my-4">...or browse other Bucket Maps</h5>
       <% } %>
-      <table class="table">
-        <tbody id="all-maps-container">
-        </tbody>
-      </table>
+      <div class="accordion" id="other-accordion">
+
+      </div>
     </div>
 
   </body>
