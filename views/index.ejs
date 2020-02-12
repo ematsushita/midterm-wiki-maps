@@ -26,6 +26,8 @@
       <img src="./assets/bucket_logo.png" class="my-2 w-50" alt="bucket.map() logo"><br>
     </div>
 
+    <% if (user) { %>
+
     <!-- Create new Map form -->
     <section>
 
@@ -85,9 +87,22 @@
       </table>
     </div>
 
+    <% } else { %>
+      <div class="container text-center">
+        <h3 class="my-5">
+          Login to create your own maps!
+        </h3>
+        <hr>
+      </div>
+    <% } %>
+
     <!--Other Lists Table-->
     <div class="container">
-      <h4>All Other Lists</h4>
+      <% if (user) { %>
+        <h4>All Other Maps</h4>
+      <% } else { %>
+        <h5 class="my-4">...or browse other Bucket Maps</h5>
+      <% } %>
       <table class="table">
         <tbody id="all-maps-container">
         </tbody>
