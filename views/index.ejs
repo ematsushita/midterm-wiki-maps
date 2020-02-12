@@ -18,48 +18,52 @@
 
   <body>
 
-    <!--Import navbar header-->
-    <%- include('./partials/_header') %>
+    <header class="header-section">
+      <!--Import navbar header-->
+      <%- include('./partials/_header') %>
 
-    <!--Main logo-->
-    <div class="container text-center my-3">
-      <img src="./assets/bucket_logo.png" class="my-2 w-50" alt="bucket.map() logo"><br>
-    </div>
+      <!--Main logo-->
+      <div class="container text-center my-3">
+        <img src="./assets/bucket_logo.png" class="my-2 w-50" alt="bucket.map() logo"><br>
+      </div>
 
-    <!-- Create new Map form -->
-    <section>
+      <% if (user) { %>
 
-      <!-- Button to add new list of points -->
-      <div class="my-3 create-map-button-container">
-        <div id="new-list-form-toggler" class="btn btn-purple text-white">
-          <span>Create a new map! </span>
-          <svg id="up-arrow" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-up"><polyline points="18 15 12 9 6 15"></polyline></svg>
-          <svg id="down-arrow" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg>
+      <!-- Create new Map form -->
+      <section>
+
+        <!-- Button to add new list of points -->
+        <div class="my-5 create-map-button-container">
+          <div id="new-list-form-toggler" class="btn btn-purple text-white" data-target="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+            <span>Create a new map! </span>
+            <svg id="up-arrow" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-up"><polyline points="18 15 12 9 6 15"></polyline></svg>
+            <svg id="down-arrow" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </div>
         </div>
-      </div>
 
-      <!-- Hidden Form -->
-      <div class="submit-new-list my-3">
-        <form class="new-map" action="/lists/create" method="POST">
+        <!-- Hidden Form -->
+        <div class="submit-new-list my-3" class="collapse" id="collapseExample">
+          <form class="new-map" action="/lists/create" method="POST">
 
-          <div class="form-group">
-            <input required name="title" type="text" class="form-control" id="newListTitle" placeholder="Title">
-          </div>
+            <div class="form-group">
+              <input required name="title" type="text" class="form-control" id="newListTitle" placeholder="Title">
+            </div>
 
-          <div class="form-group">
-            <textarea required name="description" class="form-control" id="newListDesc" placeholder="Description"></textarea>
-          </div>
+            <div class="form-group">
+              <textarea required name="description" class="form-control" id="newListDesc" placeholder="Description"></textarea>
+            </div>
 
-          <div class="create-map-button-container">
-            <button class="btn btn-purple text-white my-2">Create Map!</button>
-          </div>
+            <div class="create-map-button-container">
+              <button class="btn btn-purple text-white my-2">Create Map!</button>
+            </div>
 
-        </form>
-      </div>
-    </section>
+          </form>
+        </div>
+      </section>
+    </header>
 
     <!--Favourites Table-->
-    <div class="container">
+    <div class="container mt-4">
       <h4>Favourites</h4>
       <table class="table">
         <tbody id="favs-container">
@@ -85,9 +89,22 @@
       </table>
     </div>
 
+    <% } else { %>
+      <div class="container text-center">
+        <h3 class="my-5">
+          Login to create your own maps!
+        </h3>
+      </div>
+    </header>
+    <% } %>
+
     <!--Other Lists Table-->
     <div class="container">
-      <h4>All Other Lists</h4>
+      <% if (user) { %>
+        <h4>All Other Maps</h4>
+      <% } else { %>
+        <h5 class="my-4">...or browse other Bucket Maps</h5>
+      <% } %>
       <table class="table">
         <tbody id="all-maps-container">
         </tbody>

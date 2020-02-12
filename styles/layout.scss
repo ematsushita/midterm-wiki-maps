@@ -13,6 +13,11 @@ body {
   nav.navbar {
     background-color: $brand-dark-purple;
   }
+
+  .header-section {
+    background-image: url(http://www.transparenttextures.com/patterns/bright-squares.png);
+    padding-bottom: 1vh;
+  }
 }
 
 //lists
