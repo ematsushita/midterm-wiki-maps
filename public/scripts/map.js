@@ -91,7 +91,6 @@ const initMap = function(mapCentre, markerPoints) {
     placeMarkersPoints(markerPoints)
     map.fitBounds(bounds, 5);
   }
-
   //autocomplete function
   var input = document.getElementById('autocomplete');
 

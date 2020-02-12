@@ -164,6 +164,8 @@ $(document).ready(function() {
   //Run this function to display the table
   getPoints()
     .then(value => {
-      displayPoints(value);
+      if (value.length) {
+        displayPoints(value);
+      }
     });
 });
