@@ -1,14 +1,16 @@
 ## Bugs
 
-[ ] When a user loads a list which has no points, the map should still display.
+[x] When a user loads a list which has no points, the map should still display.
 
-[ ] The add point form picture field needs a proper placeholder text
+[x] The add point form picture field needs a proper placeholder text
 
 [ ] The add point form lat/lng fields need proper placeholder text
 
-[ ] The edit point form does not have a picture url field
+[x] The edit point form does not have a picture url field
 
-[ ] update ERD to include lat/lng
+[ ] Unfavouriting maps is buggy between "favs" and "my maps"
+
+[x] update ERD to include lat/lng
 
 [ ] when you hit enter in the search bar, do not lower the hidden form
 
@@ -24,7 +26,7 @@
 
 [ ] The edit point button does not hide the form when you click it again
 
-[ ] The edit point button should pre-populate with title and description that already exists
+[x] The edit point button should pre-populate with title and description that already exists
 
 [ ] The getPoints function on the map list page should order the query by points.id
 
