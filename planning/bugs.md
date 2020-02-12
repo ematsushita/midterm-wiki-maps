@@ -8,13 +8,11 @@
 
 [x] The edit point form does not have a picture url field
 
-[ ] My Contributions shows multiples if there are multiple points added to a list
-
 [ ] Unfavouriting maps is buggy between "favs" and "my maps"
 
 [ ] update ERD to include lat/lng
 
-[x] when not logged in, maps should display under "explore other lists"
+[ ] Map view no longer allows user to toggle favourite (button works, nothing actually happens)
 
 ## Enhancements
 
@@ -33,3 +31,5 @@
 [ ] Map should pre-populate add-point form with lat/lng when clicked
 
 [ ] List map view should show amount of favourites of a list
+
+[ ] Hover effects for favourite buttons

@@ -50,9 +50,12 @@ const getFavs = function(db, userId) {
 //Returns a list of all the list objects created by a user
 const getMyMaps = function(db, userId) {
   return db.query(`
-    SELECT lists.*, favourites.id as fave_id
+    SELECT lists.*,
+    CASE WHEN EXISTS (SELECT FROM favourites WHERE list_id = $1)
+        THEN 'true'
+        ELSE NULL
+      END as fave_id
     FROM lists
-      LEFT JOIN favourites ON favourites.list_id = lists.id
     WHERE owner_id = $1
   `, [userId]);
 };
