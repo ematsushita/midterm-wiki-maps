@@ -18,12 +18,14 @@ $(document).ready(function() {
   });
 
   //Function to send post request to edit point data when Update button is clicked
-  const updatePointForm = function(formData, url) {
-    $.post(url, formData, () => {
+  const updatePointForm = function(url, data) {
+    console.log('in update form')
+    $.post(url, data, () => {
+      console.log("in post")
       getPoints()
         .then(value => {
           displayPoints(value);
-        });
+        })
     });
   };
 
@@ -31,12 +33,12 @@ $(document).ready(function() {
   const appendForm = function(form, i) {
     $(".new-row").remove();
     $("#points-table-body tr").eq(i + 1).after(form);
-    $(".update-point").submit((event) => {
+    $(".update-point").submit(function(event) {
       event.preventDefault();
-      const serialData = $('.update-point').serialize();
-      const post_url = $('.update-point').attr("action");
+      const data = $('.update-point').serialize();
+      const url = $('.update-point').attr("action");
 
-      updatePointForm(serialData, post_url);
+      updatePointForm(url, data)
     });
   };
 
@@ -83,6 +85,7 @@ $(document).ready(function() {
 
     const $inputDescription = $("<textarea>")
       .attr("placeholder", "Description")
+      .attr("name", "description")
       .val(point.description)
       .addClass("form-control");
     const $descriptionForm = $("<div>")

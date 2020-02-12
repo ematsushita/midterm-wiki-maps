@@ -18,7 +18,7 @@ const addPoint = function(db, ownerId, listId, title, description, imgUrl, latit
     VALUES
       ($1, $2, $3, $4, $5, $6, $7)
     RETURNING *
-  `, [ownerId, listId, title, description, imgUrl, latitude, longitude]);
+  `, [listId, ownerId, title, description, imgUrl, latitude, longitude]);
 };
 
 // Removes a point from a database given a point id
@@ -36,7 +36,7 @@ const updatePoint = function(db, pointid, title, description, imgUrl) {
   return db.query(`
     UPDATE points
     SET title = $1,
-        description = $2
+        description = $2,
         img_url = $4
     WHERE id = $3
     RETURNING *
