@@ -71,6 +71,7 @@ form.new-map {
 
 form .form-header {
   font-weight: bold;
+  padding-left: 2rem;
 }
 
 .form-control {
@@ -84,17 +85,17 @@ form .form-header {
 }
 
 .new-point {
-  background-image: url(http://www.transparenttextures.com/patterns/bright-squares.png);
+  display: flex;
+  justify-content: center;
+  width: 65%;
+  margin: 0 auto;
 }
 
 .add-new-point {
-  width: 70%;
+  width: 100%;
   text-align: center;
-  display: flex;
-  justify-content: space-between;
-  margin: auto;
   display: none;
-  //background-image: url(http://www.transparenttextures.com/patterns/bright-squares.png);
+  background-image: url(http://www.transparenttextures.com/patterns/bright-squares.png);
 }
 
 .add-point-dropdown {
@@ -102,7 +103,8 @@ form .form-header {
 }
 
 #add-point-button {
-  padding: 10px;
+  margin-left: 2.5vw;
+  margin-top: 1vw;
 }
 
 .update-point {
