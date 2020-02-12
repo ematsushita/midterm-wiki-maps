@@ -1,118 +1,7 @@
 $(document).ready(function() {
 
-  const updatePointForm = function(formData, url) {
-    console.log("clicked");
-    console.log("updated");
-    console.log("url: ", url);
-    console.log("form data: ", formData);
-
-
-    $.post(url, formData, () => {
-      getPoints()
-        .then(value => {
-          displayPoints(value);
-        });
-    });
-  };
-
-
-  const setListAttr = function() {
-    $.get(`/lists/${listId}/attributes`, function(data) {
-      $("#list-title").text(data.title);
-      $("#list-desc").text(data.description);
-      const $heartIcon = $(".heart-icon");
-      console.log("heart: ", data.fave_id);
-      if (data.fave_id) $heartIcon.addClass("favourited-heart");
-
-      //adds toggler to heart icon
-      $heartIcon
-        .on("click", () => {
-          const $mapFavIcon = $('.heart-icon');
-          $mapFavIcon.toggleClass("favourited-heart");
-          return toggleFav(listId, data.owner_id);
-        });
-    });
-  };
-
-  setListAttr();
-
-  const buildEditForm = function(pointId) {
-
-    const form = `
-    <tr class="new-row">
-    <td colspan="1">
-    <div class=“update-point-form my-3">
-      <form class="update-point" action="/points/${listId}/update/${pointId}" type="submit">
-
-        <div class="form-group">
-          <input required name="title" type="text" class="form-control" placeholder="Title">
-        </div>
-
-        <div class="form-group">
-          <textarea required name="description" class="form-control" placeholder="Description"></textarea>
-        </div>
-
-        <div class=“update-point-button-container">
-          <button class="btn btn-purple text-white my-2">Update!</button>
-        </div>
-      </form>
-    </div>
-    </td>
-    </tr>
-    `;
-    return form;
-  };
-
-  const appendForm = function(form, i) {
-    $(".new-row").remove();
-    $("#points-table-body tr").eq(i + 1).after(form);
-    $(".update-point").submit((event) => {
-      event.preventDefault();
-      const serialData = $('.update-point').serialize();
-      const post_url = $('.update-point').attr("action");
-
-      updatePointForm(serialData, post_url);
-    });
-  };
-
-
-  const displayPoints = function(data) {
-    const $table = $("#points-table-body");
-    $table.empty();
-
-    for (let i = 0; i < data.length+1; i++) {
-      $table.append(`<tr id=list-item-${i}>`);
-      const $tableRow = $table.last();
-
-      $tableRow.append(`<td>${data[i].title}</td>`);
-      $tableRow.append(`<td><button id='edit-form-${i}' class="edit-point btn btn-purple text-white my-2">Edit</button></td>`);
-      $(`#edit-form-${i}`).click(() => {
-        appendForm(buildEditForm(data[i].id), i);
-      });
-      $tableRow.append(`<td><svg id='delete-btn-${i}' action="/points/${data[i].list_id}/remove/${data[i].id}" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg></td>`);
-      $(`#delete-btn-${i}`).click(() => {
-        event.preventDefault();
-        const post_url = $(`#delete-btn-${i}`).attr("action");
-        $.post(post_url, () => {
-          getPoints()
-          .then(value => {
-            displayPoints(value);
-          });
-        })
-      })
-      $table.append("</tr>");
-    }
-  };
-
-
-  getPoints()
-    .then(value => {
-      displayPoints(value);
-    });
-
-  //post request to create a new point
+  //Post request to create a new point
   $(".new-point").submit(function(event) {
-    console.log("in submit point")
     event.preventDefault();
     const serialData = $(this).serialize();
     const post_url = $(this).attr("action");
@@ -127,4 +16,142 @@ $(document).ready(function() {
 
     });
   });
+
+  //Function to send post request to edit point data when Update button is clicked
+  const updatePointForm = function(formData, url) {
+    $.post(url, formData, () => {
+      getPoints()
+        .then(value => {
+          displayPoints(value);
+        });
+    });
+  };
+
+  //Function to append Edit Point button to table when Edit button is clicked
+  const appendForm = function(form, i) {
+    $(".new-row").remove();
+    $("#points-table-body tr").eq(i + 1).after(form);
+    $(".update-point").submit((event) => {
+      event.preventDefault();
+      const serialData = $('.update-point').serialize();
+      const post_url = $('.update-point').attr("action");
+
+      updatePointForm(serialData, post_url);
+    });
+  };
+
+  //Function to send delete post request when delete button is clicked
+  const deletePointButton = function (i) {
+    event.preventDefault();
+        const post_url = $(`#delete-btn-${i}`).attr("action");
+        $.post(post_url, () => {
+          getPoints()
+          .then(value => {
+            displayPoints(value);
+          });
+        })
+  }
+
+  const setListAttr = function() {
+    $.get(`/lists/${listId}/attributes`, function(data) {
+      $("#list-title").text(data.title);
+      $("#list-desc").text(data.description);
+      const $heartIcon = $(".heart-icon");
+      if (data.fave_id) $heartIcon.addClass("favourited-heart");
+
+      //adds toggler to heart icon
+      $heartIcon
+        .on("click", () => {
+          const $mapFavIcon = $('.heart-icon');
+          $mapFavIcon.toggleClass("favourited-heart");
+          return toggleFav(listId, data.owner_id);
+        });
+    });
+  };
+
+  setListAttr();
+
+  const buildEditForm = function(point) {
+
+    const $inputTitle = $("<input>")
+      .addClass("form-control")
+      .val(point.title)
+      .attr("name", "title");
+    const $titleForm = $("<div>")
+      .addClass("form-group")
+      .append($inputTitle);
+
+    const $inputDescription = $("<textarea>")
+      .attr("placeholder", "Description")
+      .val(point.description)
+      .addClass("form-control");
+    const $descriptionForm = $("<div>")
+      .addClass("form-group")
+      .append($inputDescription);
+
+    const $inputImage = $("<input>")
+      .addClass("form-control")
+      .val(point.img_url)
+      .attr("name", "imgUrl");
+    const $imageForm = $("<div>")
+      .addClass("form-group")
+      .append($inputImage);
+
+    const $button = $("<button>")
+      .addClass("btn btn-purple text-white my-2")
+      .html("Update!");
+
+    const $buttonContainer = $("<div>")
+      .addClass("update-point-button-container")
+      .append($button);
+
+    const $innerForm = $("<form>")
+      .addClass("update-point")
+      .attr("type", "submit")
+      .attr("action", `/points/${listId}/update/${point.id}`)
+      .append($titleForm, $descriptionForm, $imageForm, $buttonContainer);
+
+    const $outerForm = $("<div>")
+      .addClass("update-point-form my-3")
+      .append($innerForm);
+
+    const $tableCell = $("<td>")
+      .attr("colspan", "3")
+      .append($outerForm);
+
+    const $tableRow = $("<tr>")
+      .addClass("new-row")
+      .append($tableCell);
+
+    return $tableRow;
+  };
+
+
+  //Function to loop through array of Points objects and display them in a table
+  const displayPoints = function(data) {
+    const $table = $("#points-table-body");
+    $table.empty();
+
+    for (let i = 0; i < data.length+1; i++) {
+      $table.append(`<tr id=list-item-${i}>`);
+      const $tableRow = $table.last();
+
+      $tableRow.append(`<td>${data[i].title}</td>`);
+      $tableRow.append(`<td><button id='edit-form-${i}' class="edit-point btn btn-purple text-white my-2">Edit</button></td>`);
+      $(`#edit-form-${i}`).click(() => {
+        appendForm(buildEditForm(data[i]), i);
+      });
+      $tableRow.append(`<td><svg id='delete-btn-${i}' action="/points/${data[i].list_id}/remove/${data[i].id}" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg></td>`);
+      $(`#delete-btn-${i}`).click(() => {
+        deletePointButton(i);
+      })
+      $table.append("</tr>");
+    }
+  };
+
+  //Run this function to display the table
+  getPoints()
+    .then(value => {
+      displayPoints(value);
+    });
 });

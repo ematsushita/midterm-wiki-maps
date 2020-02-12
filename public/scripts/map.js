@@ -5,6 +5,20 @@ let mapCentre;
 let bounds;
 let searchBox;
 
+
+let defaultPos = {}
+
+const userLocation = function() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(position => {
+      defaultPos["lat"] = position.coords.latitude;
+      defaultPos["lng"] = position.coords.longitude;
+    })
+  }
+}
+
+userLocation();
+
 //builds an infoWindow class for display on a map given data from a point
 const buildInfoWindow = function(title, desc, imgUrl) {
   infoWindow = null;
@@ -44,22 +58,74 @@ const placeMarker = function(marker, point, map) {
 };
 
 //renders the map given a centre point and a list of map points
-const initMap = function(mapCentre, markerPoints) {
-
+const initMap = function(mapCentre = defaultPos, markerPoints) {
   //sets map variable to map class
   map = new google.maps.Map(document.getElementById('map'), {zoom: 10, center: mapCentre});
 
+
   //loops through points and places a marker for each
-  markerPoints.forEach(point => {
-    const location = {lat: point.latitude, lng: point.longitude};
-    placeMarker(location, point, map);
+  if (markerPoints.length) {
+    markerPoints.forEach(point => {
+      const location = {lat: point.latitude, lng: point.longitude};
+      placeMarker(location, point, map);
 
-    //extends bounds of all points
-    bounds.extend(location);
-  });
+      //extends bounds of all points
+      bounds.extend(location);
+    });
 
-  //sets map bounds
-  map.fitBounds(bounds, 5);
+    //sets map bounds
+    map.fitBounds(bounds, 5);
+  }
+
+
+    function placeMarkerAndPanTo(latLng, map) {
+      var marker = new google.maps.Marker({
+        position: latLng,
+        map: map
+      });
+      map.panTo(latLng);
+    }
+
+
+  var input = document.getElementById('autocomplete');
+
+  var autocomplete = new google.maps.places.Autocomplete(input);
+  autocomplete.bindTo('bounds', map);
+
+  autocomplete.addListener('place_changed', function() {
+
+      var place = autocomplete.getPlace();
+      if (!place.geometry) {
+          window.alert("Autocomplete's returned place contains no geometry");
+          return;
+        }
+
+      if (place.geometry.viewport) {
+        console.log("geometry: ", place.geometry)
+        map.fitBounds(place.geometry.viewport);
+        const newLocation = {lat: place.geometry.location.lat(), lng: place.geometry.location.lng()};
+
+        //const testMarker = placeMarkerAndPanTo(newLocation, map)
+        const testMarker = new google.maps.Marker({
+          position: newLocation,
+          map: map
+        });
+        bounds.extend(newLocation)
+
+        google.maps.event.addListener(testMarker, 'click', function() {
+          $(".add-new-point").slideDown();
+          $(".form-latitude").val(place.geometry.location.lat())
+          $(".form-longitude").val(place.geometry.location.lng())
+
+        });
+
+        } else {
+            map.setCenter(place.geometry.location);
+            map.setZoom(17);
+        }
+    });
+
+
 };
 
 const getBounds = function() {
@@ -69,19 +135,25 @@ const getBounds = function() {
 $(document).ready(function() {
   getBounds()
     .then(value => {
-      bounds = new google.maps.LatLngBounds({lat: value["south"], lng: value["west"]}, {lat: value["north"], lng: value["east"]});
+      if (value.east !== null) {
+        bounds = new google.maps.LatLngBounds({lat: value["south"], lng: value["west"]}, {lat: value["north"], lng: value["east"]});
+      }
       return;
     })
     .then(() => {
       return getPoints();
     })
     .then(value => {
-      initMap(bounds.getCenter(), value);
+      if (bounds === undefined) {
+        initMap(defaultPos, value)
+      } else {
+        initMap(bounds.getCenter(), value);
+      }
     });
 
-  //sets the search box
-  searchBox = new google.maps.places.SearchBox(document.getElementById('autocomplete'), {bounds: bounds});
+  // //sets the search box
+  // searchBox = new google.maps.places.SearchBox(document.getElementById('autocomplete'), {bounds: bounds});
 
-  //sets the Places service for searching
-  service = new google.maps.places.PlacesService(map);
+  // //sets the Places service for searching
+  // service = new google.maps.places.PlacesService(map);
 });
