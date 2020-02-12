@@ -12,6 +12,8 @@
 
 [x] update ERD to include lat/lng
 
+[ ] when you hit enter in the search bar, do not lower the hidden form
+
 [ ] Map view no longer allows user to toggle favourite (button works, nothing actually happens)
 
 ## Enhancements
