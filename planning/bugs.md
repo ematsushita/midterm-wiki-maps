@@ -14,8 +14,6 @@
 
 [ ] update ERD to include lat/lng
 
-[x] when not logged in, maps should display under "explore other lists"
-
 ## Enhancements
 
 [ ] The edit point form has weird display
