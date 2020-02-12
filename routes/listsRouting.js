@@ -38,7 +38,7 @@ module.exports = (db) => {
 
   //point user to a list map display page
   router.get("/:id", (req, response) => {
-    const user = req.session.user.id;
+    const user = req.session.user;
     const listId = req.params.id;
 
     return response.render("map", { user, listId });
