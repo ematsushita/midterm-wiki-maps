@@ -52,7 +52,6 @@ $(document).ready(function() {
           .then(value => {
             clearMarkers(activePoints)
             placeMarkersPoints(value)
-            //initMap(bounds.getCenter(), value)
             displayPoints(value)
           });
         })
