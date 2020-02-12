@@ -2,7 +2,7 @@
 
 [x] When a user loads a list which has no points, the map should still display.
 
-[ ] The add point form picture field needs a proper placeholder text
+[x] The add point form picture field needs a proper placeholder text
 
 [ ] The add point form lat/lng fields need proper placeholder text
 
@@ -10,7 +10,7 @@
 
 [ ] Unfavouriting maps is buggy between "favs" and "my maps"
 
-[ ] update ERD to include lat/lng
+[x] update ERD to include lat/lng
 
 [ ] Map view no longer allows user to toggle favourite (button works, nothing actually happens)
 

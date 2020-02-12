@@ -19,8 +19,6 @@ const userLocation = function() {
 
 userLocation();
 
-
-
 //builds an infoWindow class for display on a map given data from a point
 const buildInfoWindow = function(title, desc, imgUrl) {
   infoWindow = null;
@@ -79,6 +77,55 @@ const initMap = function(mapCentre = defaultPos, markerPoints) {
     map.fitBounds(bounds, 5);
   }
 
+
+    function placeMarkerAndPanTo(latLng, map) {
+      var marker = new google.maps.Marker({
+        position: latLng,
+        map: map
+      });
+      map.panTo(latLng);
+    }
+
+
+  var input = document.getElementById('autocomplete');
+
+  var autocomplete = new google.maps.places.Autocomplete(input);
+  autocomplete.bindTo('bounds', map);
+
+  autocomplete.addListener('place_changed', function() {
+
+      var place = autocomplete.getPlace();
+      if (!place.geometry) {
+          window.alert("Autocomplete's returned place contains no geometry");
+          return;
+        }
+
+      if (place.geometry.viewport) {
+        console.log("geometry: ", place.geometry)
+        map.fitBounds(place.geometry.viewport);
+        const newLocation = {lat: place.geometry.location.lat(), lng: place.geometry.location.lng()};
+
+        //const testMarker = placeMarkerAndPanTo(newLocation, map)
+        const testMarker = new google.maps.Marker({
+          position: newLocation,
+          map: map
+        });
+        bounds.extend(newLocation)
+
+        google.maps.event.addListener(testMarker, 'click', function() {
+          $(".add-new-point").slideDown();
+          $(".form-latitude").val(place.geometry.location.lat())
+          $(".form-longitude").val(place.geometry.location.lng())
+
+        });
+
+        } else {
+            map.setCenter(place.geometry.location);
+            map.setZoom(17);
+        }
+    });
+
+
 };
 
 const getBounds = function() {
@@ -104,9 +151,9 @@ $(document).ready(function() {
       }
     });
 
-  //sets the search box
-  searchBox = new google.maps.places.SearchBox(document.getElementById('autocomplete'), {bounds: bounds});
+  // //sets the search box
+  // searchBox = new google.maps.places.SearchBox(document.getElementById('autocomplete'), {bounds: bounds});
 
-  //sets the Places service for searching
-  service = new google.maps.places.PlacesService(map);
+  // //sets the Places service for searching
+  // service = new google.maps.places.PlacesService(map);
 });
