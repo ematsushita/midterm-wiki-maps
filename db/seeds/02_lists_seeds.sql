@@ -5,4 +5,5 @@ VALUES
 (3, 'Easiest Hikes', 'These hikes are perfect for lazy people'),
 (4, 'Best Bootcamps in Vancouver', 'There is only one location on this map!'),
 (5, 'Favourite beaches', 'These are the best beaches in Vancouver'),
-(1, 'Cheap Houses in Vancouver', 'Hahaha j/k there are none');
+(1, 'Cheap Houses in Vancouver', 'Hahaha j/k there are none'),
+(4, 'Best Ramen in Vancouver', 'Great for quick eats!');

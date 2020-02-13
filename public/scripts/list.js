@@ -12,6 +12,7 @@ $(document).ready(function() {
       getPoints()
         .then(value => {
           clearMarkers(activePoints);
+          clearMarkers(tempPoints);
           placeMarkersPoints(value[0]);
           displayPoints(value[0], value[1]);
         });

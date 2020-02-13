@@ -210,6 +210,10 @@ form .form-header {
   }
 }
 
+.card-text {
+  border:0;
+}
+
 .favourited-heart:hover {
   animation: beat 1.5s infinite alternate;
 }
