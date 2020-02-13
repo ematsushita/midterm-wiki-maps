@@ -31,16 +31,15 @@ const clearMarkers = function(activePoints) {
 };
 
 //Get user's location to set map center if there are no active points
-const userLocation = function() {
+const userLocation = function(cb) {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(position => {
       defaultPos["lat"] = position.coords.latitude;
       defaultPos["lng"] = position.coords.longitude;
+      cb(defaultPos, []);
     });
   }
 };
-
-userLocation();
 
 //builds an infoWindow class for display on a map given data from a point
 const buildInfoWindow = function(title, desc, imgUrl) {
@@ -85,6 +84,7 @@ const initMap = function(mapCentre, markerPoints) {
   //sets map variable to map class
   map = new google.maps.Map(document.getElementById('map'), {zoom: 10, center: mapCentre});
 
+  console.log(mapCentre);
 
   //loops through points and places a marker for each
   if (markerPoints.length) {
@@ -107,7 +107,7 @@ const initMap = function(mapCentre, markerPoints) {
     }
 
     if (place.geometry.viewport) {
-      console.log("Place: ", place)
+      console.log("Place: ", place);
       map.fitBounds(place.geometry.viewport);
       const newLocation = {lat: place.geometry.location.lat(), lng: place.geometry.location.lng()};
 
@@ -123,7 +123,7 @@ const initMap = function(mapCentre, markerPoints) {
         $(".add-new-point").slideDown();
         $(".form-latitude").val(place.geometry.location.lat());
         $(".form-longitude").val(place.geometry.location.lng());
-        $(".form-title").val(place.name)
+        $(".form-title").val(place.name);
 
       });
 
@@ -142,12 +142,12 @@ const getBounds = function() {
 
 $(document).ready(function() {
 
-  $('form input').keydown(function (e) {
+  $('form input').keydown(function(e) {
     if (e.keyCode == 13) {
-        e.preventDefault();
-        return false;
+      e.preventDefault();
+      return false;
     }
-});
+  });
 
   $(".add-point-dropdown").click(function(event) {
     event.preventDefault();
@@ -166,9 +166,10 @@ $(document).ready(function() {
     })
     .then(value => {
       if (bounds === undefined) {
-        initMap(defaultPos, value);
+        return userLocation(initMap);
       } else {
-        initMap(bounds.getCenter(), value);
+        return initMap(bounds.getCenter(), value);
       }
+
     });
 });
