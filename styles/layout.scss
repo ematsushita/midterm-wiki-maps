@@ -178,37 +178,6 @@ form .form-header {
   fill: red;
 }
 
-<<<<<<< HEAD
-@media (min-width: 34em) {
-  .card-columns {
-      -webkit-column-count: 2;
-      -moz-column-count: 2;
-      column-count: 2;
-  }
-}
-
-@media (min-width: 48em) {
-  .card-columns {
-      -webkit-column-count: 3;
-      -moz-column-count: 3;
-      column-count: 3;
-  }
-}
-
-@media (min-width: 62em) {
-  .card-columns {
-      -webkit-column-count: 4;
-      -moz-column-count: 4;
-      column-count: 4;
-  }
-}
-
-@media (min-width: 75em) {
-  .card-columns {
-      -webkit-column-count: 5;
-      -moz-column-count: 5;
-      column-count: 5;
-=======
 .favourited-heart:hover {
   animation: beat 1.5s infinite alternate;
 }
@@ -220,6 +189,5 @@ form .form-header {
   }
   50% {
     transform: scale(1.6);
->>>>>>> 97160bee35c341b5e5d81e48da9f31caa93fa6e0
   }
 }
