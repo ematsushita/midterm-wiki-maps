@@ -1,8 +1,8 @@
 # User Stories
 
-- [x] [ ] As a user, I want to see a list of available maps so that I can load/use them 
+- [x] [x] As a user, I want to see a list of available maps so that I can load/use them 
 
-- [x] [ ] As a user, I want to be able to view all the points on a map so I can go to those places 
+- [x] [x] As a user, I want to be able to view all the points on a map so I can go to those places 
 
 - [x] [x] As a user, I should be able to put as many points on a single map as I want, so I can keep my ideas together 
 
@@ -20,9 +20,9 @@
 
 - [x] [x] As an authenticated user, I want to be able to remove points on a map so I can declutter them 
 
-- [x] [ ] As a user, I want to be able to add maps to my favourites so I have easy access to them 
+- [x] [x] As a user, I want to be able to add maps to my favourites so I have easy access to them 
 
-- [x] [ ] As a user, I want to be able to have a list of all of my favourited maps in a list so I have easy access to them
+- [x] [x] As a user, I want to be able to have a list of all of my favourited maps in a list so I have easy access to them
 
 - [x] [x] As a user, I want to have a list of all the maps I've contributed to so I have easy access to them 
 
@@ -30,4 +30,4 @@
 
 - [ ] As an authenticated user, I want to be able to update a map so I can keep its title and description up to date 
 
-- [ ] As an authenticated user, I want to be able to remove maps from my favourites so that I can keep my list up to date 
+- [x] [x] As an authenticated user, I want to be able to remove maps from my favourites so that I can keep my list up to date 
