@@ -178,7 +178,6 @@ form .form-header {
   fill: red;
 }
 
-<<<<<<< HEAD
 @media (min-width: 34em) {
   .card-columns {
       -webkit-column-count: 2;
@@ -208,11 +207,12 @@ form .form-header {
       -webkit-column-count: 5;
       -moz-column-count: 5;
       column-count: 5;
-=======
-.favourited-heart:hover {
-  animation: beat 1.5s infinite alternate;
+  }
 }
 
+.favourited-heart:hover {
+    animation: beat 1.5s infinite alternate;
+  }
 
 @keyframes beat {
   0% {
@@ -220,6 +220,5 @@ form .form-header {
   }
   50% {
     transform: scale(1.6);
->>>>>>> 97160bee35c341b5e5d81e48da9f31caa93fa6e0
   }
 }
