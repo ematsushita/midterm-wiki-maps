@@ -11,7 +11,13 @@ body {
   }
 
   nav.navbar {
-    background-color: $brand-dark-purple;
+    //background-color: $brand-dark-purple;
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(60,22,66,1) 35%, rgba(210,186,214,1) 100%);
+  }
+
+  .navbar-text {
+    font-weight: 500;
   }
 
   .header-section {
@@ -32,6 +38,11 @@ body {
 
 .heart-icon {
   margin: 5px 15px 0px 5px;
+}
+
+.card-title {
+  color: black;
+  font-weight: 600;
 }
 
 // Basic Button Classes
@@ -103,8 +114,8 @@ form .form-header {
 }
 
 #add-point-button {
-  margin-left: 2.5vw;
   margin-top: 1vw;
+  padding: 0.5rem;
 }
 
 .update-point {
