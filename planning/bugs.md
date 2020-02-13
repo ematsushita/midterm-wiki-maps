@@ -15,3 +15,5 @@
 [ ] Responsive Design
 
 [ ] Paginate results if more than X
+
+[ ] Make pins purple
