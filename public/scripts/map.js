@@ -91,14 +91,15 @@ const initMap = function(mapCentre, markerPoints) {
     placeMarkersPoints(markerPoints);
     map.fitBounds(bounds, 5);
   }
-  //autocomplete function
+
+
+  /////////////////////autocomplete function////////////////////////
   let input = document.getElementById('autocomplete');
 
   let autocomplete = new google.maps.places.Autocomplete(input);
   autocomplete.bindTo('bounds', map);
 
   autocomplete.addListener('place_changed', function() {
-    //testMarker.setVisible(false);
     let place = autocomplete.getPlace();
     if (!place.geometry) {
       window.alert("Autocomplete's returned place contains no geometry");
@@ -106,6 +107,7 @@ const initMap = function(mapCentre, markerPoints) {
     }
 
     if (place.geometry.viewport) {
+      console.log("Place: ", place)
       map.fitBounds(place.geometry.viewport);
       const newLocation = {lat: place.geometry.location.lat(), lng: place.geometry.location.lng()};
 
@@ -113,12 +115,15 @@ const initMap = function(mapCentre, markerPoints) {
         position: newLocation,
         map: map
       });
-      bounds.extend(newLocation);
+      if (bounds) {
+        bounds.extend(newLocation);
+      }
 
       google.maps.event.addListener(testMarker, 'click', function() {
         $(".add-new-point").slideDown();
         $(".form-latitude").val(place.geometry.location.lat());
         $(".form-longitude").val(place.geometry.location.lng());
+        $(".form-title").val(place.name)
 
       });
 
@@ -136,6 +141,13 @@ const getBounds = function() {
 };
 
 $(document).ready(function() {
+
+  $('form input').keydown(function (e) {
+    if (e.keyCode == 13) {
+        e.preventDefault();
+        return false;
+    }
+});
 
   $(".add-point-dropdown").click(function(event) {
     event.preventDefault();
