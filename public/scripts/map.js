@@ -20,6 +20,7 @@ const placeMarkersPoints = function(markerPoints) {
     //extends bounds of all points
     bounds.extend(location);
   });
+  map.fitBounds(bounds);
 };
 
 //Function to clear markers
