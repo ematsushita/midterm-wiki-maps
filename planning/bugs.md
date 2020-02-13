@@ -1,8 +1,8 @@
 ## Bugs
 
-[ ] When you update a form, the info windows do not reflect new changes
+[ ] favouritng should be disabled when logged out
 
-[ ] Sometimes a map does not load if there are no points
+[ ] Unauthenticated users should be able to edit or delete or add points
 
 ## Enhancements
 
@@ -15,3 +15,5 @@
 [ ] Hover effects for favourite buttons
 
 [ ] Responsive Design
+
+[ ] Paginate results if more than X

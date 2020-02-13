@@ -115,7 +115,7 @@ const initMap = function(mapCentre, markerPoints) {
         position: newLocation,
         map: map
       });
-      activePoints.push(testMarker)
+      activePoints.push(testMarker);
       if (bounds) {
         bounds.extend(newLocation);
       }
@@ -171,7 +171,7 @@ $(document).ready(function() {
       if (bounds === undefined) {
         return userLocation(initMap);
       } else {
-        return initMap(bounds.getCenter(), value);
+        return initMap(bounds.getCenter(), value[0]);
       }
 
     });
