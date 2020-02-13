@@ -94,6 +94,7 @@ $(document).ready(function() {
       .addClass("btn")
       .addClass("btn-link")
       .addClass("collapsed")
+      .addClass("card-title")
       .attr('type', 'button')
       .text(card.title)
       .appendTo($cardHeading);

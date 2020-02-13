@@ -7,6 +7,8 @@ let searchBox;
 let testMarker;
 let defaultPos = {};
 let activePoints = [];
+let tempPoint;
+let tempPoints = [];
 let newMarker;
 
 
@@ -20,6 +22,7 @@ const placeMarkersPoints = function(markerPoints) {
     //extends bounds of all points
     bounds.extend(location);
   });
+  map.fitBounds(bounds);
 };
 
 //Function to clear markers
@@ -63,11 +66,31 @@ const buildInfoWindow = function(title, desc, imgUrl) {
   return infoWindow;
 };
 
+const icon = {
+  path: "M7.8,1.3L7.8,1.3C6-0.4,3.1-0.4,1.3,1.3c-1.8,1.7-1.8,4.6-0.1,6.3c0,0,0,0,0.1,0.1" +
+                                "l3.2,3.2l3.2-3.2C9.6,6,9.6,3.2,7.8,1.3C7.9,1.4,7.9,1.4,7.8,1.3z M4.6,5.8c-0.7,0-1.3-0.6-1.3-1.4c0-0.7,0.6-1.3,1.4-1.3" +
+                                "c0.7,0,1.3,0.6,1.3,1.3C5.9,5.3,5.3,5.9,4.6,5.8z",
+  strokeColor: '#ffffff',
+  fillColor: '#660875',
+  fillOpacity: 1.0,
+  scale: 3
+}
+
+const tempIcon = {
+  path: "M7.8,1.3L7.8,1.3C6-0.4,3.1-0.4,1.3,1.3c-1.8,1.7-1.8,4.6-0.1,6.3c0,0,0,0,0.1,0.1" +
+                                "l3.2,3.2l3.2-3.2C9.6,6,9.6,3.2,7.8,1.3C7.9,1.4,7.9,1.4,7.8,1.3z M4.6,5.8c-0.7,0-1.3-0.6-1.3-1.4c0-0.7,0.6-1.3,1.4-1.3" +
+                                "c0.7,0,1.3,0.6,1.3,1.3C5.9,5.3,5.3,5.9,4.6,5.8z",
+  strokeColor: '#ffffff',
+  fillColor: '#ff0000',
+  fillOpacity: 1.0,
+  scale: 3
+}
+
 //places a marker from a list of points on a list
 const placeMarker = function(marker, point, map) {
 
   //newMarker is the marker object
-  const newMarker = new google.maps.Marker({position: marker, map: map});
+  const newMarker = new google.maps.Marker({position: marker, map: map, icon: icon});
 
   //adds an event listener on click to craete an info window and display it
   google.maps.event.addListener(newMarker, 'click', function() {
@@ -93,6 +116,29 @@ const initMap = function(mapCentre, markerPoints) {
   }
 
 
+  //tempMarkers
+  google.maps.event.addListener(map, 'click', function(event) {
+    if (tempPoints.length) {
+      clearMarkers(tempPoints);
+    }
+    let tempLocation = event.latLng
+    tempPoint = new google.maps.Marker({
+      position: tempLocation,
+      map: map,
+      icon: tempIcon
+    });
+    tempPoints.push(tempPoint)
+
+    google.maps.event.addListener(tempPoint, 'click', function() {
+      $(".add-new-point").slideDown();
+      $(".form-latitude").val(event.latLng.lat());
+      $(".form-longitude").val(event.latLng.lng());
+
+    });
+ });
+
+
+
   /////////////////////autocomplete function////////////////////////
   let input = document.getElementById('autocomplete');
 
@@ -113,7 +159,8 @@ const initMap = function(mapCentre, markerPoints) {
 
       testMarker = new google.maps.Marker({
         position: newLocation,
-        map: map
+        map: map,
+        icon: tempIcon
       });
       activePoints.push(testMarker);
       if (bounds) {
