@@ -2,8 +2,6 @@
 
 [ ] favouritng should be disabled when logged out
 
-[ ] Unauthenticated users should be able to edit or delete or add points
-
 ## Enhancements
 
 [ ] Redo Point List and Edit Point Form
