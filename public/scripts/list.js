@@ -2,6 +2,7 @@ $(document).ready(function() {
 
   //Post request to create a new point
   $(".new-point").submit(function(event) {
+    console.log("hello")
     event.preventDefault();
     const serialData = $(this).serialize();
     const postUrl = $(this).attr("action");
@@ -11,6 +12,8 @@ $(document).ready(function() {
       $(".add-new-point").slideUp();
       getPoints()
         .then(value => {
+          clearMarkers(activePoints);
+          placeMarkersPoints(value);
           displayPoints(value);
         });
     });
@@ -21,6 +24,8 @@ $(document).ready(function() {
     $.post(url, data, () => {
       getPoints()
         .then(value => {
+          clearMarkers(activePoints);
+          placeMarkersPoints(value);
           displayPoints(value);
         });
     });

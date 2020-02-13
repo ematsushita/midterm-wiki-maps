@@ -107,7 +107,7 @@ const initMap = function(mapCentre, markerPoints) {
     }
 
     if (place.geometry.viewport) {
-      console.log("Place: ", place);
+
       map.fitBounds(place.geometry.viewport);
       const newLocation = {lat: place.geometry.location.lat(), lng: place.geometry.location.lng()};
 
@@ -115,6 +115,7 @@ const initMap = function(mapCentre, markerPoints) {
         position: newLocation,
         map: map
       });
+      activePoints.push(testMarker)
       if (bounds) {
         bounds.extend(newLocation);
       }
@@ -124,6 +125,8 @@ const initMap = function(mapCentre, markerPoints) {
         $(".form-latitude").val(place.geometry.location.lat());
         $(".form-longitude").val(place.geometry.location.lng());
         $(".form-title").val(place.name);
+        $(".form-img-url").val(place.photos[0].getUrl({'maxWidth': 500, 'maxHeight': 500}));
+        $(".form-description").val(place.reviews[0]["text"]);
 
       });
 
