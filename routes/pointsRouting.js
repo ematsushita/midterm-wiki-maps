@@ -6,14 +6,20 @@ module.exports = (db) => {
 
   //get array of points objects for rendering
   router.get("/:listid", (req, response) => {
+    let userId;
+    (req.session.user)
+      ? userId = req.session.user.id
+      : userId = 0;
 
     getPoints(db, req.params.listid)
-      .then(res => response.json(res.rows));
+      .then(res => {
+        response.json([res.rows, userId]);
+      });
   });
 
   //Add a new point to a list given its id
   router.post("/:listid/add", (req, response) => {
-    const ownerId = 1//req.session.user.id;
+    const ownerId = 1;//req.session.user.id;
     const listId = req.params.listid;
     const { title, description, imgUrl, latitude, longitude } = req.body;
 

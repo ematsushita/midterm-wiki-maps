@@ -1,8 +1,6 @@
 ## Bugs
 
-[ ] When you update a form, the info windows do not reflect new changes
-
-[ ] Sometimes a map does not load if there are no points
+[ ] favouritng should be disabled when logged out
 
 ## Enhancements
 
@@ -15,3 +13,5 @@
 [ ] Hover effects for favourite buttons
 
 [ ] Responsive Design
+
+[ ] Paginate results if more than X
