@@ -2,7 +2,6 @@ $(document).ready(function() {
 
   //Post request to create a new point
   $(".new-point").submit(function(event) {
-    console.log("hello");
     event.preventDefault();
     const serialData = $(this).serialize();
     const postUrl = $(this).attr("action");
@@ -31,17 +30,59 @@ $(document).ready(function() {
     });
   };
 
-  //Function to append Edit Point button to table when Edit button is clicked
-  const appendForm = function(form, i) {
-    $(".new-row").remove();
-    $("#points-table-body tr").eq(i + 1).after(form);
-    $(".update-point").submit(function(event) {
-      event.preventDefault();
-      const data = $('.update-point').serialize();
-      const url = $('.update-point').attr("action");
+  const toggleEditForm = (pointId, i) => {
+    const $card = $(`#point-card-${pointId}`);
+
+    const $editButton = $card.find(".edit-button-container");
+    const $notEditFields = $card.find(".point-not-editable");
+    const $editFields = $card.find(".point-editable");
+
+    if ($notEditFields.length) {
+      $notEditFields.removeClass("point-not-editable");
+      $notEditFields.removeAttr("readonly");
+      $notEditFields.addClass("point-editable");
+
+      const $urlField = $notEditFields.first();
+      $urlField.slideDown();
+
+      $editButton.empty();
+      const $editIcon = $(`<svg id='edit-btn-${pointId}' xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-square"><polyline points="9 11 12 14 22 4"></polyline><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>`)
+        .addClass("editButton")
+        .click(() => {
+          const newTitle = $(`#visible-card-title-${pointId}`).html();
+          $(`#hidden-card-title-${pointId}`).val(newTitle);
+
+          toggleEditForm(pointId);
+        });
+      $editButton.append($editIcon);
+
+    } else {
+      $editFields.removeClass("point-editable");
+      $editFields.attr("readonly", true);
+      $editFields.addClass("point-not-editable");
+
+      const $urlField = $notEditFields.find($("[name='imgUrl']"));
+      $urlField.hide();
+
+      $editButton.empty();
+      const $editIcon = $(`<svg id='edit-btn-${pointId}' xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>`)
+        .addClass("editButton")
+        .click(() => {
+          toggleEditForm(pointId);
+        });
+      $editButton.append($editIcon);
+
+      $;
+
+      const data = $card.find($('.update-point')).serialize();
+
+      console.log($('.update-point'));
+      const url = $(`#point-card-${pointId} .update-point`).attr("action");
+
+      console.log("url: ", url, "data: ", data);
 
       updatePointForm(url, data);
-    });
+    }
   };
 
   //Function to send delete post request when delete button is clicked
@@ -59,7 +100,7 @@ $(document).ready(function() {
     });
   };
 
-
+  //Fetches the Map List Attributes (title, desc, likes, favourite status)
   const setListAttr = function() {
     $.get(`/lists/${listId}/attributes`, function(data) {
       $("#list-title").text(data.title);
@@ -79,90 +120,114 @@ $(document).ready(function() {
 
   setListAttr();
 
-  const buildEditForm = function(point) {
-
-    const $inputTitle = $("<input>")
-      .addClass("form-control")
-      .val(point.title)
-      .attr("name", "title");
-    const $titleForm = $("<div>")
-      .addClass("form-group")
-      .append($inputTitle);
-
-    const $inputDescription = $("<textarea>")
-      .attr("placeholder", "Description")
-      .attr("name", "description")
-      .val(point.description)
-      .addClass("form-control");
-    const $descriptionForm = $("<div>")
-      .addClass("form-group")
-      .append($inputDescription);
-
-    const $inputImage = $("<input>")
-      .addClass("form-control")
-      .val(point.img_url)
-      .attr("name", "imgUrl");
-    const $imageForm = $("<div>")
-      .addClass("form-group")
-      .append($inputImage);
-
-    const $button = $("<button>")
-      .addClass("btn btn-purple text-white my-2")
-      .html("Update!");
-
-    const $buttonContainer = $("<div>")
-      .addClass("update-point-button-container")
-      .append($button);
-
-    const $innerForm = $("<form>")
-      .addClass("update-point")
-      .attr("type", "submit")
-      .attr("action", `/points/${listId}/update/${point.id}`)
-      .append($titleForm, $descriptionForm, $imageForm, $buttonContainer);
-
-    const $outerForm = $("<div>")
-      .addClass("update-point-form my-3")
-      .append($innerForm);
-
-    const $tableCell = $("<td>")
-      .attr("colspan", "3")
-      .append($outerForm);
-
-    const $tableRow = $("<tr>")
-      .addClass("new-row")
-      .attr("id", `edit-row-${point.id}`)
-      .append($tableCell);
-
-    return $tableRow;
-  };
-
   //Function to loop through array of Points objects and display them in a table
   const displayPoints = function(data, userId) {
-    const $table = $("#points-table-body");
-    $table.empty();
+    const $list = $("#point-card-list");
+    $list.empty();
 
-    for (let i = 0; i < data.length + 1; i++) {
-      $table.append(`<tr id=list-item-${i}>`);
-      const $tableRow = $table.last();
+    for (let i = 0; i < data.length; i++) {
 
-      $tableRow.append(`<td>${data[i].title}</td>`);
+      const $newCard = $("<div>")
+        .attr("id", `point-card-${data[i].id}`)
+        .addClass("card")
+        .appendTo($list);
+
+      const $cardImg = $("<img>")
+        .addClass("card-img-top")
+        .attr("src", data[i].img_url)
+        .attr("alt", `Image from ${data[i].title}`)
+        .appendTo($newCard);
+
+      const $cardBody = $("<div>")
+        .addClass("card-body")
+        .appendTo($newCard);
 
       if (userId) {
-        $tableRow.append(`<td><button id='edit-form-${i}' class="edit-point btn btn-purple text-white my-2">Edit</button></td>`);
-        $(`#edit-form-${i}`).click(() => {
-          if ($(`#edit-row-${data[i].id}`).length) {
-            $(`#edit-row-${data[i].id}`).remove();
-          } else {
-            appendForm(buildEditForm(data[i]), i);
-          }
-        });
 
-        $tableRow.append(`<td><svg id='delete-btn-${i}' action="/points/${data[i].list_id}/remove/${data[i].id}" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg></td>`);
-        $(`#delete-btn-${i}`).click(() => {
-          deletePointButton(i);
-        });
+        const $delButtonContainer = $("<div>")
+          .addClass("delButtonContainer")
+          .addClass("position-absolute")
+          .addClass("d-flex")
+          .addClass("justify-content-center")
+          .addClass("align-items-center")
+          .appendTo($newCard);
+
+        const $delButtonBacking = $("<div>")
+          .addClass("delButtonBacking")
+          .addClass("d-flex")
+          .addClass("justify-content-center")
+          .addClass("align-items-center")
+          .appendTo($delButtonContainer);
+
+        const $delButton = $(`<svg id='delete-btn-${data[i].id}' action="/points/${data[i].list_id}/remove/${data[i].id}" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>`)
+          .appendTo($delButtonBacking)
+          .addClass("text-danger")
+          .addClass("delButton")
+          .click(() => {
+            deletePointButton(data[i].id);
+          });
       }
-      $table.append("</tr>");
+
+      const $editForm = $("<form>")
+        .addClass("update-point")
+        .attr("type", "submit")
+        .attr("action", `/points/${data[i].list_id}/update/${data[i].id}`)
+        .appendTo($cardBody);
+
+      if (userId) {
+
+        const $editButton = $("<div>")
+          .addClass("edit-button-container")
+          .appendTo($cardBody);
+
+        const $editIcon = $(`<svg id='edit-btn-${data[i].id}' xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>`)
+          .addClass("editButton")
+          .appendTo($editButton)
+          .click(() => {
+            toggleEditForm(data[i].id, i);
+          });
+      }
+
+      const $cardUrl = $("<input>")
+        .attr("readonly", true)
+        .val(data[i].img_url)
+        .attr("name", "imgUrl")
+        .addClass("point-not-editable")
+        .css("display", "none")
+        .css("width", "100%")
+        .css("padding", "2px")
+        .css("margin-bottom", "0.85rem")
+        .appendTo($editForm);
+
+      const $hiddenCardTitle = $("<input>")
+        .attr("name", "title")
+        .attr("id", `hidden-card-title-${data[i].id}`)
+        .text(data[i].title)
+        .css("display", "none")
+        .appendTo($editForm);
+
+      const $cardTitle = $("<h3>")
+        .attr("id", `visible-card-title-${data[i].id}`)
+        .attr("readonly", true)
+        .attr("contenteditable", true)
+        .text(data[i].title)
+        .addClass("card-title")
+        .addClass("point-not-editable")
+        .appendTo($editForm);
+
+      autosize($cardTitle);
+
+      const $cardDesc = $("<textarea>")
+        .attr("readonly", true)
+        .text(data[i].description)
+        .attr("name", "description")
+        .css("width", "100%")
+        .css("resize", "none")
+        .addClass("card-text")
+        .addClass("point-not-editable")
+        .appendTo($editForm);
+
+      autosize($cardDesc);
     }
   };
 

@@ -79,6 +79,60 @@ form .form-header {
   margin: auto;
 }
 
+//Deleting points from a list and editing points on a list
+.delButtonContainer {
+  top: 6px;
+  right: 6px;
+  height: 30px;
+  width: 30px;
+}
+
+.delButtonBacking {
+  border-radius: 12px;
+  background-color: #FFFFFF;
+  opacity: 50%;
+  height: 24px;
+  width: 24px;
+  transition: opacity 0.2s, width 0.2s, height 0.2s, border-radius 0.2s;
+}
+
+.delButtonBacking:hover {
+  opacity: 70%;
+  width: 28px;
+  height: 28px;
+  border-radius: 14px;
+}
+
+.edit-button-container   {
+  bottom: 6px;
+  right: 6px;
+  height: 30px;
+  width: 30px;
+}
+
+.editButton {
+  opacity: 40%;
+  color: brown;
+  transition: opacity 0.2s;
+}
+
+.editButton:hover {
+  opacity: 80%;
+}
+
+.point-not-editable {
+  //border: 1px solid black;
+}
+
+.point-not-editable:focus {
+  outline: 0px;
+}
+
+.point-editable {
+  border: 2px solid rgba(0, 0, 0, .2);
+  border-radius: 5px;
+}
+
 //Adding a new point to list
 .second-header {
   background-image: url(http://www.transparenttextures.com/patterns/bright-squares.png);
@@ -107,16 +161,40 @@ form .form-header {
   margin-top: 1vw;
 }
 
-.update-point {
-  text-align: center;
-  display: flex;
-  justify-content: space-between;
-  flex-direction: column;
-
-}
-
 //For favouriting hearts
 .favourited-heart {
   color: red;
   fill: red;
+}
+
+@media (min-width: 34em) {
+  .card-columns {
+      -webkit-column-count: 2;
+      -moz-column-count: 2;
+      column-count: 2;
+  }
+}
+
+@media (min-width: 48em) {
+  .card-columns {
+      -webkit-column-count: 3;
+      -moz-column-count: 3;
+      column-count: 3;
+  }
+}
+
+@media (min-width: 62em) {
+  .card-columns {
+      -webkit-column-count: 4;
+      -moz-column-count: 4;
+      column-count: 4;
+  }
+}
+
+@media (min-width: 75em) {
+  .card-columns {
+      -webkit-column-count: 5;
+      -moz-column-count: 5;
+      column-count: 5;
+  }
 }
