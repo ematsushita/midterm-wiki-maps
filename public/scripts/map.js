@@ -20,7 +20,9 @@ const placeMarkersPoints = function(markerPoints) {
     activePoints.push(newMarker);
 
     //extends bounds of all points
-    bounds.extend(location);
+    if (bounds) {
+      bounds.extend(location);
+    }
   });
   map.fitBounds(bounds);
 };
@@ -209,9 +211,6 @@ $(document).ready(function() {
       if (value.east !== null) {
         bounds = new google.maps.LatLngBounds({lat: value["south"], lng: value["west"]}, {lat: value["north"], lng: value["east"]});
       }
-      return;
-    })
-    .then(() => {
       return getPoints();
     })
     .then(value => {

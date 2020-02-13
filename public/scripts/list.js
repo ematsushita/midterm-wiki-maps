@@ -9,14 +9,18 @@ $(document).ready(function() {
     $.post(postUrl, serialData, () => {
       $(".new-point")[0].reset();
       $(".add-new-point").slideUp();
-      getPoints()
-        .then(value => {
-          clearMarkers(activePoints);
-          clearMarkers(tempPoints);
-          placeMarkersPoints(value[0]);
-          displayPoints(value[0], value[1]);
-        });
-    });
+      getBounds()
+      .then(value => {
+        bounds = new google.maps.LatLngBounds({lat: value["south"], lng: value["west"]}, {lat: value["north"], lng: value["east"]});
+        return getPoints();
+      })
+     .then(value => {
+        clearMarkers(activePoints);
+        clearMarkers(tempPoints);
+        placeMarkersPoints(value[0]);
+        displayPoints(value[0], value[1]);
+      })
+    })
   });
 
   //Function to send post request to edit point data when Update button is clicked
