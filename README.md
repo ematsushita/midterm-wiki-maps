@@ -8,6 +8,14 @@ Bucket.map() is a small web app to allow users to view, create, edit, and save c
 
 Users can curate collections of places of interest, favourite restaurants, or other attractions. These lits are public and accessible to other users.
 
+## Getting Started
+- Install all dependencies (using the `npm install` command).
+- Use .env.example as a template for your .env file. Configure it to point to your own postgres database.
+- You can use the included schema and seeds to set up your database and seed with test data. Use the command `npm run db:reset` to create the tables and data.
+- Run the development web server using the `npm run local` command.
+
+*Note:* autosize is included in the package.json and can be installed as a dependency with `npm install`, however this project does not use a javascript compiler. Therefore for demonstration purposes, the autosize.js file was copied from the node_module folder to the public/scripts folder and loaded into the html file to run client-side.
+
 ## Features
 
 ### View Available Lists
@@ -81,6 +89,7 @@ All the data from the collections are also accessible through the map view by cl
 - npm
 - pg
 - pg-native
+- autosize
 - body-parser
 - chalk
 - cookie-session
