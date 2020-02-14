@@ -46,7 +46,7 @@ The fields in the new point form are completely adjustable by the user, but will
 
 Know a special place so secret it's not on Google? No problem! Click anywhere on the map to place a custom marker. Click it again when it's just right, and it's latitude and longitude will be automatically added to the add point field.
 
-![Add Point](https://github.com/ematsushita/midterm-wiki-maps/blob/master/docs/click_point.gif)
+![Add Point](https://github.com/ematsushita/midterm-wiki-maps/blob/master/docs/click-point.gif)
 
 ### Displaying Points
 
@@ -62,17 +62,17 @@ All points are displayed below the map using a responsive card column design for
 
 Points can be edited inline through their card columns. The map mage is instantly refreshed with the new data.
 
-![Edit Points](https://github.com/ematsushita/midterm-wiki-maps/blob/master/docs/edit-point.gif)
+![Edit Points](https://github.com/ematsushita/midterm-wiki-maps/blob/master/docs/edit_point.gif)
 
 With a simple click, they can be removed from the list as well.
 
-![Delete Points](https://github.com/ematsushita/midterm-wiki-maps/blob/master/docs/delete-point.gif)
+![Delete Points](https://github.com/ematsushita/midterm-wiki-maps/blob/master/docs/delete_point.gif)
 
 ### Info Windows
 
 All the data from the collections are also accessible through the map view by clicking on the points to load their corresponding info windows.
 
-![Info Windows](https://github.com/ematsushita/midterm-wiki-maps/blob/master/docs/info-window.gif)
+![Info Windows](https://github.com/ematsushita/midterm-wiki-maps/blob/master/docs/info_window.gif)
 
 
 ## Package Dependencies
