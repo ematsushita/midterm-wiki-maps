@@ -1,6 +1,6 @@
 # Bucket.map()
 
-![bucket.map() logo](https://github.com/ematsushita/midterm-wiki-maps/blob/master/public/assets/bucket_logo.png?raw=true)
+![bucket.map() logo](https://github.com/ematsushita/midterm-wiki-maps/blob/master/docs/bucket_logo.png)
 
 ## Bucket Lists for your Life!
 
