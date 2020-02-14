@@ -3,6 +3,10 @@
 $brand-dark-purple: #3C1642;
 $brand-purple: #660875;
 
+[type="submit"] {
+  -webkit-appearance: none; /* 2 */
+}
+
 body {
   background-color: #EEE;
 
