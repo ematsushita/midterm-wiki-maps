@@ -22,6 +22,7 @@ module.exports = (db) => {
 
   //Fetch list title and description for display on the list map page
   router.get("/:id/attributes", (req, response) => {
+    console.log("Here")
     let userId;
     (req.session.user)
       ? userId = req.session.user.id

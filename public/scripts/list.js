@@ -110,6 +110,7 @@ $(document).ready(function() {
     $.get(`/lists/${listId}/attributes`, function(data) {
       $("#list-title").text(data.title);
       $("#list-desc").text(data.description);
+      $("#list-owner").text(`Created by: ${data.owner}`);
       const $heartIcon = $(".heart-icon");
       if (data.fave_id) $heartIcon.addClass("favourited-heart");
 

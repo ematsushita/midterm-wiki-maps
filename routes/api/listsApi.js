@@ -12,13 +12,14 @@ const addList = function(db, ownerId, title, desc) {
 // fave_id will be null if it has not been favourited given the user id
 const getList = function(db, userId, listId) {
   return db.query(`
-    SELECT lists.*,
+    SELECT lists.*, users.name as owner,
       CASE WHEN EXISTS (SELECT FROM favourites WHERE list_id = $2 AND user_id = $1)
         THEN favourites.id
         ELSE NULL
       END as fave_id
     FROM lists
       LEFT JOIN favourites ON favourites.list_id = lists.id
+      JOIN users ON lists.owner_id = users.id
     WHERE lists.id = $2
   `, [userId, listId]);
 };
