@@ -63,7 +63,7 @@ const getMyMaps = function(db, userId) {
 //Returns a list of all the list objects with at least one point contributed by a user
 const getMyContributions = function(db, userId) {
   return db.query(`
-    SELECT lists.*,
+    SELECT distinct lists.*,
       CASE WHEN EXISTS (SELECT FROM favourites WHERE list_id = lists.id AND user_id = $1)
         THEN 'true'
         ELSE NULL

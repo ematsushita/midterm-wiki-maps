@@ -17,14 +17,24 @@ INSERT INTO points (list_id, owner_id, title, description, img_url, latitude, lo
 VALUES
 (2, 2, 'Devonian Harbour Park', 'After doing a boat tour of the Vancouver Harbour by the paddle boat of Harbour Cruises we decided to relax for a while. We found this nice little park with benches just outside the entrance gate of the Harbour Cruises dock. There were some trees and a lawn and we sat down on a bench in the shade and ate our picnic lunch which we had brought with us. Being very close to Stanley Park and the Seawall walk, which is an extension from the Coal Harbour seawalk trail, we saw a lot of people hiking or biking along to Stanley Park and back. There were good views of the Coal Harbour section with the ships sailing in and out. We enjoyed our brief moments of relaxation and refreshments sitting in Devonian Park.', 'https://lh5.googleusercontent.com/p/AF1QipMyxilaDktSEQMqRDlB2NNnTpfcd1mdy4vdHaNX=w408-h306-k-no', 49.294330, -123.134781),
 (2, 2, 'Stanley Park Small Dog Park', 'Great small dog park! My only complaint is that its not that busy, so you dont usually run into other dogs.', 'https://lh5.googleusercontent.com/p/AF1QipPL9PK2XmPx6NKW57vfc1YDQLmmdBX-arsfvcmJ=w408-h766-k-no', 49.292597, -123.144854),
-(2, 4, 'Charleson Dog Park', 'Excellent off leash dog park exhisting of a large open field and water feature to the south. 4 stars since it gets very boggy and muddy when the weather is poor.', 'https://lh5.googleusercontent.com/p/AF1QipMjZm2tCLFloeBR6mzeSeXTxOIC60nbpn_tKXDx=w408-h304-k-no', 49.267013, -123.124548);
+(2, 4, 'Charleson Dog Park', 'Excellent off leash dog park exhisting of a large open field and water feature to the south. 4 stars since it gets very boggy and muddy when the weather is poor.', 'https://lh5.googleusercontent.com/p/AF1QipMjZm2tCLFloeBR6mzeSeXTxOIC60nbpn_tKXDx=w408-h304-k-no', 49.267013, -123.124548),
+(2, 4, 'Queen Elizabeth Dog Park', ' I love this park as just a simple place to let the little ones run free. It is off leash right from the parking lot.', 'https://cdn.shopify.com/s/files/1/2537/7848/t/3/assets/nu_dogpark_9_qe.jpg', 49.24966, -123.11934),
+(2, 4, 'Hadden Park Dog Beach', 'One of my favourite places in the city. Love watching all the dogs enjoy the beach. ', 'https://vancouver.ca/images/parkfinder/hadden04.jpg', 49.2759755, -123.1461918),
+(2, 4, 'Nelson Park Dog Park', 'One of the west ends busiest off leach dogparks. The owners. The lovers. The aunts . The uncles. The dog walkers. ', 'https://www.bringfido.com/assets/images/categories/attraction_parks.jpg', 49.283815, -123.130657),
+(2, 4, 'Hinge Park', 'Hinge Park is a naturalized wetland park in the city of Vancouver, British Columbia. Hinge Park covers 2.3 acres and also connects to Habitat Island which covers around 1.5 acres. ', 'https://www.vanwoof.ca/Content/Images/DogParkImages/9/FalseCreek-2.jpg', 49.271795, -123.106561),
+(2, 4, 'Trout Lake', 'Great paths for running, walking and cycling. Always cleared. Good time for all.', 'https://s3-media0.fl.yelpcdn.com/bphoto/ZCuT4xbQPiYVUTBfVVRE0A/348s.jpg', 49.258332, -123.061924),
+(2, 4, 'Coopers Park', 'Green space on an old sawmill & cooperage plot with a skate park, playground & basketball court.', 'https://www.vanwoof.ca/Content/Images/DogParkImages/11/Coopers-3.jpg', 49.273885, -123.116088),
+(2, 4, 'Kings Mill Walk Park', 'Great dog park for pets and humans!  Fenced area right alongside the Spirit Trail which connects to Lonsdale Quay to the east or West Vancouver in the opposite direction. ', 'https://s3-media0.fl.yelpcdn.com/bphoto/YcZ5fghz20VeC_AoDweuWw/o.jpg', 49.3165176,-123.1016717);
+
 
 INSERT INTO points (list_id, owner_id, title, description, img_url, latitude, longitude)
 VALUES
 (3, 3, 'Quarry Rock', 'One of the most amazing places I’ve been for hiking! The view and the breeze from the top is mesmerizing. This place is a definite go to In You visit Canada! One of the greatest tourist attraction sites. It is dog friendly too. Saw many people bringing their pets. You can watch the view all day long!', 'https://lh5.googleusercontent.com/p/AF1QipOBm5GnhZGx9ro5dFj-71agwpf1QvweGlCgIlOh=w408-h272-k-no', 49.333827, -122.936710),
 (3, 3, 'Buntzen Lake', 'Did this trail on February 18th, very icy! Would recommend spikes or waiting until the snow melts. The trail took us much longer with the ice. Still a nice trail, would be a good easy hike in the warmer months.', 'https://lh5.googleusercontent.com/p/AF1QipNmNxQlC8qKE4AllS6Aws4D2RT85M64-QLqwzcz=w426-h240-k-no', 49.339885, -122.855694),
 (3, 1, 'Jug Island Beach', 'Great little hike. At the end you come to a little private beach. One of my favorite hikes. About a 45min to 1 hour hike one way. 2 hours approx to the end and back.', 'https://lh5.googleusercontent.com/p/AF1QipMzkeBMJWRGQwP8YqUFHv1Hk6LIH6W01n4aqalI=w408-h272-k-no', 49.329815, -122.915529),
-(3, 5, 'Burnaby Mountain Conservation Area', 'Another our go-to place to walk and hike on Saturday morning. Although we’ve been here so many times but every visit gave us a different vibe. Nice cardio workout or to just enjoy the city view.', 'https://lh5.googleusercontent.com/p/AF1QipMEHtSVdJOLICvJtKiNz81L5jCl6L3nirnSNUVO=w426-h240-k-no', 49.282065, -122.935195);
+(3, 5, 'Burnaby Mountain Conservation Area', 'Another our go-to place to walk and hike on Saturday morning. Although we’ve been here so many times but every visit gave us a different vibe. Nice cardio workout or to just enjoy the city view.', 'https://lh5.googleusercontent.com/p/AF1QipMEHtSVdJOLICvJtKiNz81L5jCl6L3nirnSNUVO=w426-h240-k-no', 49.282065, -122.935195),
+(3, 5, 'Pacific Spirit Regional Park', 'Pacific Spirit Regional Park is a 874 hectares park located in the University Endowment Lands, on Point Grey to the west of the city of Vancouver, British Columbia.', 'https://www.vancouvertrails.com/images/photos/pacific-spirit-regional-park-3.jpg', 49.273494,-123.246344);
+
 
 INSERT INTO points (list_id, owner_id, title, description, img_url, latitude, longitude)
 VALUES
@@ -50,3 +60,26 @@ VALUES
 (7, 4, 'Gyoza Bar', 'Contemporary brick-walled spot for Japanese dumplings, tapas & ramen dishes, with beer, wine & sake.', 'https://gyozabar.ca/wp-content/uploads/2019/08/Ramen-and-Gyoza-Spread.jpg', 49.285640, -123.114853),
 (7, 4, 'Kokoro Tokyo Mazesoba', 'Airy, contemporary Japanese eatery serving soupless ramen noodles with creative toppings.', 'https://images.dailyhive.com/20180910124153/Kokoro-Tokyo-Mazesoba.jpg', 49.284649, -123.115310),
 (7, 4, 'Jinya Ramen Bar', 'There is a bit of a wait time but the food, ambiance and service is worth it.', 'https://images.dailyhive.com/20170426135512/jinya-ramen-bar.jpg', 49.283420, -123.126411);
+
+
+INSERT INTO points (list_id, owner_id, title, description, img_url, latitude, longitude)
+VALUES
+
+(8, 2, 'Kitsilano Pool', 'This 137-metre, heated saltwater swimming pool on the bay features three slides & a cafe.', 'https://images.glaciermedia.ca/polopoly_fs/1.23796226.1555625718!/fileImage/httpImage/image.jpg_gen/derivatives/landscape_804/kitsilano-pool.jpg', 49.273071, -123.157329),
+(8, 2, 'Britannia Pool', 'Great family pool really nice staff. They have saunas inside the change rooms and have a gym right upstairs from the pool.', 'https://www.britanniacentre.org/database/images/DSC_0708.JPG', 49.275654,-123.073787),
+(8, 2, 'Second Beach Swimming Pool', 'Big outdoor, heated swimming pool with views of English Bay, kids play features & concessions.', 'https://images.glaciermedia.ca/polopoly_fs/1.22318317.1504218530!/fileImage/httpImage/image.jpg_gen/derivatives/landscape_804/pool.jpg', 49.231229,-123.064989),
+(8, 2, 'Templeton Park Pool', 'The pool is a little small, but good swimming instuructors make it worth taking a class there.', 'https://i.cbc.ca/1.4309869.1506537802!/fileImage/httpImage/image.JPG_gen/derivatives/16x9_780/templeton-pool.JPG', 49.2712195, -123.0599196),
+(8, 2, 'Renfrew Park Pool', 'This Renfrew pool has great instructors for teaching your kids to swim. They are usually fully booked but their system has recently changed. ', 'https://www.calgary.ca/CSPS/Recreation/PublishingImages/Grid-Banner/Renfrew-grid-1.jpg', 49.2512299,- 123.042891),
+(8, 2, 'Killarney Pool', 'Top notch hot tub. Even better steam room. Balcony to cool off is a nice touch. One star for no sauna. Otherwise lovely.', 'https://images.glaciermedia.ca/polopoly_fs/1.23918230.1565991776!/fileImage/httpImage/image.jpg_gen/derivatives/landscape_804/killarney-pool.jpg', 49.2267237,-123.0434269),
+(8, 2, 'New Brighton Pool', 'Heated swimming pool open May to September, offering lap lanes, a kids area & harbor views.', 'https://postmediavancouversun2.files.wordpress.com/2019/11/png0522nkitspool-2.jpg', 49.289839, -123.040303),
+(8, 2, 'Vancouver Aquatic Centre', 'This place is right by Sunset Beach. You can swim, take swimming lessons for a very good price, ideal for low income families. There is a separate area for smaller children as well.', 'https://s3-media0.fl.yelpcdn.com/bphoto/ZGjL75oidZ3AnQCmRS9fwA/l.jpg', 49.2767503, -123.1353921);
+
+
+INSERT INTO points (list_id, owner_id, title, description, img_url, latitude, longitude)
+VALUES
+
+(9, 3, 'Museum of Vancouver', 'Museum focused on city issues & history, with a strong collection of First Nations art & artifacts.', 'https://img.grouponcdn.com/pwa_test/2Ce5erD6mKzGpiGYEZD3Jy5Fy8Pc/2C-674x418/v1/c700x420.jpg', 49.2763483,-123.1446238),
+(9, 3, 'Vancouver Art Gallery', 'Gallery known for its touring exhibits, work by local artists (like Emily Carr) & photo collection.', 'https://images.dailyhive.com/20160809132024/vancouver-art-gallery.jpg', 49.282877, -123.1205639),
+(9, 3, 'Science World', 'Interactive science displays & films for kids from toddlers to early teens, inside a geodesic dome.', 'https://www.vmcdn.ca/f/files/via/import/2019/09/05094813_science-world-vancouver.jpg;w=960', 49.2734537, -123.1036739),
+(9, 3, 'Gastown Steam Clock', 'Built in 1977, this well-known, antique-style clock is powered by steam & whistles to tell the time.', 'https://s3-media0.fl.yelpcdn.com/bphoto/oB7PnnVgTNR8bevGPVk6hw/o.jpg', 49.192124, -123.171033),
+(9, 3, 'VanDusen Botanical Garden', 'Space with ever-changing greenery, flowers & art installations plus fine dining & a casual cafe.', 'https://assets.simpleviewinc.com/simpleview/image/upload/crm/vancouverbc/Heron-Lake-2_B0308D2D-63EF-43CB-95841686D4052681_a284e680-38c3-40bf-adfafbc962a214a1.jpg', 49.239073, -123.134619);
